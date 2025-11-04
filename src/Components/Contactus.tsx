@@ -14,7 +14,7 @@ const Contactus = () => {
         <section className="w-full bg-gray-50 py-10 flex flex-col items-center">
             {/* Header */}
             <motion.h2
-                className="text-2xl font-bold text-blue-800 mb-6 border-b-4 border-orange-500 pb-2"
+                className="text-2xl font-bold text-blue-800 mb-6 border-b-4 border-orange-500 pb-2 font-martel"
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -30,7 +30,7 @@ const Contactus = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-4 font-martel">
                         {isMarathi ? "संपर्क माहिती" : "Contact Information"}
                     </h3>
 
@@ -77,7 +77,7 @@ const Contactus = () => {
                 
                     <motion.div
                         className="flex-1 relative"
-                        style={{ y: floatY, opacity: floatOpacity }}
+                        style={{ y: floatY }}
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 60 }}
                     >

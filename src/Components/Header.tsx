@@ -147,7 +147,7 @@ export default function AmrutHeader() {
     return (
         <div
             className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300 `}
-            style={{ fontSize: `${fontSize}px` }}
+            style={{ fontSize: `${fontSize}px`, fontFamily: 'Martel, serif' }}
         >
             {/* --- Sub Header --- */}
             <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-orange-50'} py-2 sm:py-3 px-2 sm:px-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-orange-200'}`}>
@@ -161,7 +161,7 @@ export default function AmrutHeader() {
                             <h2 className="text-sm sm:text-base lg:text-[11px] font-bold text-orange-600 leading-tight break-words font-martel">
                                 महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत)
                             </h2>
-                            <h3 className={`text-xs sm:text-sm md:text-base lg:text-[11px] font-semibold ${isDarkMode ? 'text-gray-200' : 'text-black'} mt-1 leading-tight break-words`}>
+                            <h3 className={`text-xs sm:text-sm md:text-base lg:text-[11px] font-semibold ${isDarkMode ? 'text-gray-200' : 'text-black'} mt-1 leading-tight break-words font-martel`}>
                                 ACADEMY OF MAHARASHTRA RESEARCH, UPLIFTMENT AND TRAINING (AMRUT)
                             </h3>
                         </div>
@@ -187,7 +187,7 @@ export default function AmrutHeader() {
             <nav className={`${isDarkMode ? 'bg-gray-800' : 'bg-orange-600'} shadow-lg`}>
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     {/* Desktop Menu */}
-                    <ul className="hidden lg:flex flex-wrap">
+                    <ul className="hidden lg:flex flex-wrap font-martel">
                         {menuStructure.map((menu, idx) => (
                             <li
                                 key={idx}

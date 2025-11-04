@@ -64,6 +64,7 @@ const Footer = () => {
 
   return (
     <footer
+      style={{ fontFamily: 'Martel, serif' }}
       ref={footerRef}
       className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-blue-900 text-white mt-auto"
     >
@@ -91,14 +92,14 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-10 md:gap-16">
           {/* Column 1 */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent font-martel">
               {currentContent.aboutTitle}
             </h3>
-            <p className="text-gray-300 text-sm leading-relaxed mb-4">
+            <p className="text-gray-300 text-sm leading-relaxed mb-4 font-martel">
               {currentContent.aboutText}
             </p>
             <motion.button
-              className="px-5 py-2 bg-gradient-to-r from-orange-500 to-blue-500 rounded-full text-white font-medium text-sm hover:shadow-lg transition-all"
+              className="px-5 py-2 bg-gradient-to-r from-orange-500 to-blue-500 rounded-full text-white font-medium text-sm hover:shadow-lg transition-all font-martel"
               whileHover={{ scale: 1.05 }}
             >
               {currentContent.readMore}
@@ -107,10 +108,10 @@ const Footer = () => {
 
           {/* Column 2 */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent font-martel">
               {currentContent.linksTitle}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 font-martel">
               {currentContent.links.map((link, i) => (
                 <motion.li
                   key={i}
@@ -127,10 +128,10 @@ const Footer = () => {
 
           {/* Column 3 */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent font-martel">
               {currentContent.contactTitle}
             </h3>
-            <ul className="space-y-4 text-gray-300 text-sm">
+            <ul className="space-y-4 text-gray-300 text-sm font-martel">
               <li className="flex items-center gap-2">
                 <Mail className="text-orange-400 w-4 h-4" /> {currentContent.email}{" "}
                 <a href="mailto:info@mahaamrut.org.in" className="hover:text-orange-300">
@@ -164,7 +165,7 @@ const Footer = () => {
 
         {/* Visitor Count */}
         <motion.div variants={itemVariants} className="mt-12 border-t border-white/10 pt-6">
-          <h3 className="text-xl font-semibold mb-3 text-orange-400">
+          <h3 className="text-xl font-semibold mb-3 text-orange-400 font-martel">
             {currentContent.visitorTitle}
           </h3>
           <div className="flex gap-2">
@@ -182,7 +183,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <motion.div
-          className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm"
+          className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm font-martel"
           variants={itemVariants}
         >
           <p>© 2025 Academy of Maharashtra Research. All rights reserved.</p>

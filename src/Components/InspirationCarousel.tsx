@@ -53,7 +53,7 @@ const InspirationCarousel = () => {
     <div className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-white py-10 overflow-hidden">
       {/* Header */}
       <motion.h2
-        className="text-2xl md:text-3xl font-bold text-white bg-orange-600 w-full text-center py-3 shadow-md rounded-t-md"
+        className="text-2xl md:text-3xl font-bold text-white bg-orange-600 w-full text-center py-3 shadow-md rounded-t-md font-martel"
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -83,7 +83,7 @@ const InspirationCarousel = () => {
             {/* Name */}
             <motion.h3
               variants={childVariants}
-              className="text-lg md:text-xl font-semibold text-orange-800 mb-3 text-center"
+              className="text-lg md:text-xl font-semibold text-orange-800 mb-3 text-center font-martel"
             >
               {quotes[index].name}
             </motion.h3>
@@ -91,7 +91,7 @@ const InspirationCarousel = () => {
             {/* Quote */}
             <motion.p
               variants={childVariants}
-              className="text-gray-700 text-center italic leading-relaxed text-[16px] max-w-2xl"
+              className="text-gray-700 text-center italic leading-relaxed text-[16px] max-w-2xl font-martel"
             >
               “{quotes[index].quote}”
             </motion.p>

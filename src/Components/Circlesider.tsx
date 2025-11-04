@@ -59,8 +59,8 @@ export default function CircularSlider() {
 
       {/* Title & Description (below circle) */}
       <div>
-        <h3 className="text-[10px] font-semibold text-orange-600">{currentSlide.title}</h3>
-        <p className="text-[9px] text-gray-600 dark:text-gray-300">{currentSlide.description}</p>
+        <h3 className="text-[10px] font-semibold text-orange-600 font-martel">{currentSlide.title}</h3>
+        <p className="text-[9px] text-gray-600 dark:text-gray-300 font-martel">{currentSlide.description}</p>
       </div>
     </div>
   );
