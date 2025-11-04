@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
-    Search, Sun, Moon, Plus, Minus, RotateCcw,
-    Facebook, Twitter, Instagram, Youtube, ChevronDown, Menu, X
+    Search, Sun, Moon, ChevronDown, Menu, X,
+    Facebook, Twitter, Instagram, Youtube
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants, Easing } from 'framer-motion';
 import CircleSider from './Circlesider';
-import { useLanguage } from "../Context/AuthContext.tsx";
+import { useLanguage } from "../Context/AuthContext";
 
 interface SchemeDetail {
     name: string;
@@ -32,18 +32,77 @@ interface MenuItem {
     submenus?: SchemeItem[];
 }
 
+interface LanguageContext {
+    isMarathi: boolean;
+    toggleLanguage: () => void;
+}
+
+// Schemes array definition
+const schemes: SchemeItem[] = [
+    { name: "अमृत – MCED लघुउद्योजक, स्वयंरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: "/schemes/mced" },
+    { name: "अमृत – विविध स्पर्धा परीक्षा पायाभूत प्रशिक्षण कार्यक्रम", link: "/schemes/exam-training" },
+    { name: "AIIMS, IIT, IIM, IIIT संस्थांमध्ये प्रवेश घेतलेल्या विद्यार्थ्यांना अर्थसहाय्य योजना", link: "/schemes/admission-assistance" },
+    {
+        title: "UPSC स्पर्धा परीक्षा",
+        submenu: [
+            {
+                title: "अभियांत्रिकी सेवा",
+                subdetails: [
+                    { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/engineering/pre" },
+                    { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/engineering/main" }
+                ]
+            },
+            {
+                title: "नागरी सेवा",
+                subdetails: [
+                    { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/civil/pre" },
+                    { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/civil/main" }
+                ]
+            },
+            {
+                title: "वन सेवा",
+                subdetails: [
+                    { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/forest/pre" },
+                    { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/forest/main" }
+                ]
+            }
+        ]
+    },
+    { name: "शासकीय संगणक टंकलेखन व लघुलेखन परीक्षा (GCC-TBC)", link: "/schemes/gcc-tbc" },
+    { name: "कृषि उद्योग प्रशिक्षण योजना", link: "/schemes/agri-training" },
+    { name: "स्वरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: "/schemes/self-employment" },
+    { name: "ड्रोन पायलट प्रशिक्षण योजना", link: "/schemes/drone-pilot" },
+    { name: "अमृत - CIPET कौशल्य विकास प्रशिक्षण", link: "/schemes/cipet" },
+    { name: "अमृत - NIELIT कौशल्य विकास प्रशिक्षण", link: "/schemes/nielit" },
+    { name: "आर्थिक साक्षरता प्रशिक्षण योजना", link: "/schemes/financial-literacy" },
+    { name: "अमृत सुवर्णिम प्रशिक्षण योजना", link: "/schemes/suvarnim" },
+    { name: "अमृत आयात-निर्यात प्रशिक्षण योजना", link: "/schemes/import-export" },
+    { name: "अमृत - बेकरी प्रशिक्षण योजना", link: "/schemes/bakery" },
+    { name: "तांत्रिक रोजगार प्रशिक्षण (IGTR) योजना", link: "/schemes/igtr" },
+    { name: "माहिती तंत्रज्ञान आणि इलेक्ट्रॉनिक्स तसेच उच्च कार्यक्षमता संगणक प्रशिक्षण (C-DAC)", link: "/schemes/cdac" },
+    { name: "अमृत - BHAU Incubation Program", link: "/schemes/bhau" },
+    { name: "अमृत - MSSU Incubation Program", link: "/schemes/mssu" },
+    { name: "अमृत - कलश (MKCL) अमृत सॉफ्ट स्किल व संगणक कौशल्य विकास योजना", link: "/schemes/mkcl" },
+    { name: "वैक्तिक कर्ज व्याज परतावा योजना", link: "/schemes/loan-interest" },
+    { name: "अमृत - स्वयं शिक्षण प्रोत्साहन योजना", link: "/schemes/self-learning" },
+];
+
 export default function AmrutHeader() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [fontSize, setFontSize] = useState(16);
+    const fontSize = 16;
     const [openMenu, setOpenMenu] = useState<number | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [mobileNestedSubmenu, setMobileNestedSubmenu] = useState<{ menuIdx: number | null, subIdx: number | null }>({ menuIdx: null, subIdx: null });
-    const [mobileFinalSubmenu, setMobileFinalSubmenu] = useState<{ menuIdx: number | null, subIdx: number | null, nestedIdx: number | null }>({ menuIdx: null, subIdx: null, nestedIdx: null });
-    const { isMarathi, toggleLanguage } = useLanguage();
+    const [activeSubmenu, setActiveSubmenu] = useState<{
+        menuIndex: number | null;
+        submenuIndex: number | null;
+        nestedIndex: number | null;
+    }>({
+        menuIndex: null,
+        submenuIndex: null,
+        nestedIndex: null
+    });
+    const { isMarathi, toggleLanguage } = useLanguage() as LanguageContext;
     const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
-    const increaseFontSize = () => setFontSize(prev => Math.min(prev + 2, 24));
-    const decreaseFontSize = () => setFontSize(prev => Math.max(prev - 2, 12));
-    const resetFontSize = () => setFontSize(16);
 
     // Type guards
     function isSubMenuItem(item: SchemeItem): item is SubMenuItem {
@@ -54,145 +113,273 @@ export default function AmrutHeader() {
         return typeof item === 'object' && 'title' in item && 'subdetails' in item;
     }
 
-    const renderSubMenu = (submenu: SchemeItem[], parentClassName: string) => {
-        return submenu.map((item, idx) => {
-            const isNested = isSubMenuItem(item);
-            const displayText = isNested ? item.title : item.name;
-            const link = !isNested ? item.link : undefined;
-
-            return (
-                <div key={idx} className={`relative ${parentClassName}`}>
-                    {link ? (
-                        <Link
-                            to={link}
-                            className="block px-5 py-3 text-gray-100 font-martel hover:bg-gray-700 transition-colors flex justify-between items-center break-words whitespace-normal border-b border-gray-700"
-                        >
-                            <span className="pr-2 text-[15px] font-medium">{displayText}</span>
-                            {isNested && (
-                                <ChevronDown size={16} className="transform -rotate-90 flex-shrink-0 opacity-75" />
-                            )}
-                        </Link>
-                    ) : (
-                        <div className="block px-5 py-3 text-gray-100 font-martel hover:bg-gray-700 transition-colors flex justify-between items-center break-words whitespace-normal border-b border-gray-700">
-                            <span className="pr-2 text-[15px] font-medium">{displayText}</span>
-                            {isNested && (
-                                <ChevronDown size={16} className="transform -rotate-90 flex-shrink-0 opacity-75" />
-                            )}
-                        </div>
-                    )}
-
-                    {isNested && (
-                        <div className="fixed w-96 bg-gray-800 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 max-h-[200px] overflow-y-auto z-[51]">
-                            {item.submenu.map((nestedItem, nestedIdx) => {
-                                const hasSubdetails = isSubDetail(nestedItem);
-                                return hasSubdetails ? (
-                                    <div key={nestedIdx} className="relative group">
-                                        <div className="block px-5 py-3 text-gray-100 font-martel hover:bg-gray-700 transition-colors flex justify-between items-center break-words whitespace-normal border-b border-gray-700">
-                                            <span className="pr-2 text-[15px] font-medium">{nestedItem.title}</span>
-                                            <ChevronDown size={16} className="transform -rotate-90 flex-shrink-0 opacity-75" />
-                                        </div>
-                                        <div className="fixed w-96 bg-gray-800 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 max-h-[200px] overflow-y-auto z-[52]">
-                                            {nestedItem.subdetails.map((detail, detailIdx) => (
-                                                <Link
-                                                    key={detailIdx}
-                                                    to={detail.link}
-                                                    className="block px-5 py-3 text-gray-100 font-martel hover:bg-gray-700 transition-colors break-words whitespace-normal text-[15px] font-medium border-b border-gray-700"
-                                                >
-                                                    {detail.name}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <Link
-                                        key={nestedIdx}
-                                        to={nestedItem.link}
-                                        className="block px-5 py-3 text-gray-100 font-martel hover:bg-gray-700 transition-colors break-words whitespace-normal text-[15px] font-medium border-b border-gray-700"
-                                    >
-                                        {nestedItem.name}
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    )}
-                </div>
-            );
-        });
+    const handleMobileMenuClick = (menuIndex: number, hasSubmenus: boolean) => {
+        if (hasSubmenus) {
+            setActiveSubmenu(prev => ({
+                menuIndex: prev.menuIndex === menuIndex ? null : menuIndex,
+                submenuIndex: null,
+                nestedIndex: null
+            }));
+        } else {
+            setMobileMenuOpen(false);
+        }
     };
 
-    // Menu structure
+    const handleSubmenuClick = (menuIndex: number, submenuIndex: number, hasNestedMenu: boolean) => {
+        if (hasNestedMenu) {
+            setActiveSubmenu(prev => ({
+                menuIndex,
+                submenuIndex: prev.submenuIndex === submenuIndex ? null : submenuIndex,
+                nestedIndex: null
+            }));
+        }
+    };
+
+    const handleNestedMenuClick = (menuIndex: number, submenuIndex: number, nestedIndex: number) => {
+        setActiveSubmenu(prev => ({
+            menuIndex,
+            submenuIndex,
+            nestedIndex: prev.nestedIndex === nestedIndex ? null : nestedIndex
+        }));
+    };
+
+    const renderMobileMenu = () => (
+        <div className="lg:hidden">
+            <div className="flex items-center justify-between px-4 py-3">
+                <span className="text-white font-medium">{isMarathi ? 'मेनू' : 'Menu'}</span>
+                <button 
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+                    className="text-white p-2 hover:bg-orange-700 rounded-md transition-colors"
+                    aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                >
+                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+            </div>
+
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="bg-orange-600 overflow-hidden"
+                    >
+                        <div className="divide-y divide-orange-500">
+                            {menuStructure.map((menu, idx) => (
+                                <div key={idx} className="relative">
+                                    <div className="flex items-center">
+                                        {menu.link && !menu.link.startsWith('http') ? (
+                                            <Link
+                                                to={menu.link}
+                                                className="flex-1 px-4 py-3 text-white hover:bg-orange-700 transition-colors"
+                                                onClick={() => !menu.submenus && setMobileMenuOpen(false)}
+                                            >
+                                                {menu.name}
+                                            </Link>
+                                        ) : (
+                                            <a
+                                                href={menu.link || '#'}
+                                                className="flex-1 px-4 py-3 text-white hover:bg-orange-700 transition-colors"
+                                                target={menu.link?.startsWith('http') ? "_blank" : undefined}
+                                                rel={menu.link?.startsWith('http') ? "noopener noreferrer" : undefined}
+                                            >
+                                                {menu.name}
+                                            </a>
+                                        )}
+                                        {menu.submenus && (
+                                            <button
+                                                onClick={() => handleMobileMenuClick(idx, true)}
+                                                className="px-4 py-3 text-white hover:bg-orange-700 transition-colors"
+                                            >
+                                                <motion.span
+                                                    animate={{ rotate: activeSubmenu.menuIndex === idx ? 180 : 0 }}
+                                                    transition={{ duration: 0.2 }}
+                                                >
+                                                    <ChevronDown size={20} />
+                                                </motion.span>
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* First level submenu */}
+                                    <AnimatePresence>
+                                        {menu.submenus && activeSubmenu.menuIndex === idx && (
+                                            <motion.div
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: 'auto' }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="bg-orange-700"
+                                            >
+                                                {menu.submenus.map((submenu, subIdx) => {
+                                                    const isNested = isSubMenuItem(submenu);
+                                                    const displayText = isNested ? submenu.title : submenu.name;
+                                                    const link = !isNested ? submenu.link : undefined;
+
+                                                    return (
+                                                        <div key={subIdx} className="relative">
+                                                            <div className="flex items-center">
+                                                                {link ? (
+                                                                    <Link
+                                                                        to={link}
+                                                                        className="flex-1 px-6 py-3 text-white hover:bg-orange-800 transition-colors text-sm"
+                                                                        onClick={() => setMobileMenuOpen(false)}
+                                                                    >
+                                                                        {displayText}
+                                                                    </Link>
+                                                                ) : (
+                                                                    <button
+                                                                        className="flex-1 px-6 py-3 text-white hover:bg-orange-800 transition-colors text-sm text-left"
+                                                                        onClick={() => handleSubmenuClick(idx, subIdx, isNested)}
+                                                                    >
+                                                                        {displayText}
+                                                                    </button>
+                                                                )}
+                                                                {isNested && (
+                                                                    <button
+                                                                        onClick={() => handleSubmenuClick(idx, subIdx, true)}
+                                                                        className="px-4 py-3 text-white hover:bg-orange-800 transition-colors"
+                                                                    >
+                                                                        <motion.span
+                                                                            animate={{ 
+                                                                                rotate: activeSubmenu.submenuIndex === subIdx ? 180 : 0 
+                                                                            }}
+                                                                            transition={{ duration: 0.2 }}
+                                                                        >
+                                                                            <ChevronDown size={16} />
+                                                                        </motion.span>
+                                                                    </button>
+                                                                )}
+                                                            </div>
+
+                                                            {/* Second level submenu */}
+                                                            <AnimatePresence>
+                                                                {isNested && activeSubmenu.submenuIndex === subIdx && (
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, height: 0 }}
+                                                                        animate={{ opacity: 1, height: 'auto' }}
+                                                                        exit={{ opacity: 0, height: 0 }}
+                                                                        transition={{ duration: 0.2 }}
+                                                                        className="bg-orange-800"
+                                                                    >
+                                                                        {submenu.submenu.map((nestedItem, nestedIdx) => {
+                                                                            const hasSubdetails = isSubDetail(nestedItem);
+                                                                            const nestedText = hasSubdetails ? nestedItem.title : nestedItem.name;
+                                                                            const nestedLink = !hasSubdetails ? nestedItem.link : undefined;
+
+                                                                            return (
+                                                                                <div key={nestedIdx} className="relative">
+                                                                                    <div className="flex items-center">
+                                                                                        {nestedLink ? (
+                                                                                            <Link
+                                                                                                to={nestedLink}
+                                                                                                className="flex-1 px-8 py-3 text-white hover:bg-orange-900 transition-colors text-sm"
+                                                                                                onClick={() => setMobileMenuOpen(false)}
+                                                                                            >
+                                                                                                {nestedText}
+                                                                                            </Link>
+                                                                                        ) : (
+                                                                                            <button
+                                                                                                className="flex-1 px-8 py-3 text-white hover:bg-orange-900 transition-colors text-sm text-left"
+                                                                                                onClick={() => handleNestedMenuClick(idx, subIdx, nestedIdx)}
+                                                                                            >
+                                                                                                {nestedText}
+                                                                                            </button>
+                                                                                        )}
+                                                                                        {hasSubdetails && (
+                                                                                            <button
+                                                                                                onClick={() => handleNestedMenuClick(idx, subIdx, nestedIdx)}
+                                                                                                className="px-4 py-3 text-white hover:bg-orange-900 transition-colors"
+                                                                                            >
+                                                                                                <motion.span
+                                                                                                    animate={{ 
+                                                                                                        rotate: activeSubmenu.nestedIndex === nestedIdx ? 180 : 0 
+                                                                                                    }}
+                                                                                                    transition={{ duration: 0.2 }}
+                                                                                                >
+                                                                                                    <ChevronDown size={16} />
+                                                                                                </motion.span>
+                                                                                            </button>
+                                                                                        )}
+                                                                                    </div>
+
+                                                                                    {/* Third level submenu */}
+                                                                                    <AnimatePresence>
+                                                                                        {hasSubdetails && activeSubmenu.nestedIndex === nestedIdx && (
+                                                                                            <motion.div
+                                                                                                initial={{ opacity: 0, height: 0 }}
+                                                                                                animate={{ opacity: 1, height: 'auto' }}
+                                                                                                exit={{ opacity: 0, height: 0 }}
+                                                                                                transition={{ duration: 0.2 }}
+                                                                                                className="bg-orange-900"
+                                                                                            >
+                                                                                                {nestedItem.subdetails.map((detail, detailIdx) => (
+                                                                                                    <Link
+                                                                                                        key={detailIdx}
+                                                                                                        to={detail.link}
+                                                                                                        className="block px-10 py-3 text-white hover:bg-orange-950 transition-colors text-sm"
+                                                                                                        onClick={() => setMobileMenuOpen(false)}
+                                                                                                    >
+                                                                                                        {detail.name}
+                                                                                                    </Link>
+                                                                                                ))}
+                                                                                            </motion.div>
+                                                                                        )}
+                                                                                    </AnimatePresence>
+                                                                                </div>
+                                                                            );
+                                                                        })}
+                                                                    </motion.div>
+                                                                )}
+                                                            </AnimatePresence>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ))}
+
+                            {/* Mobile Social Media and Login Links */}
+                            <div className="px-4 py-4 space-y-4">
+                                <div className="flex justify-center gap-6">
+                                    <a href="https://www.facebook.com/MahaAmrutOfficial" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 transition-colors">
+                                        <Facebook size={20} />
+                                    </a>
+                                    <a href="https://x.com/Maha_Amrut" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 transition-colors">
+                                        <Twitter size={20} />
+                                    </a>
+                                    <a href="https://www.instagram.com/mahaamrut_official" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 transition-colors">
+                                        <Instagram size={20} />
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/academy-of-maharashtra-research-upliftment-and-training-718924289" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-200 transition-colors">
+                                        <Youtube size={20} />
+                                    </a>
+                                </div>
+                                <div className="flex justify-center gap-4">
+                                    <Link to="https://app.mahaamrut.org.in/amrut/choose-login" className="px-4 py-2 bg-white text-orange-600 rounded-md hover:bg-gray-100 transition-colors text-sm font-medium">
+                                        लॉगिन
+                                    </Link>
+                                    <Link to="https://app.mahaamrut.org.in/amrut/choose-login" className="px-4 py-2 bg-white text-orange-600 rounded-md hover:bg-gray-100 transition-colors text-sm font-medium">
+                                        नोंदणी
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+
+    // Main menu structure
     const menuStructure: MenuItem[] = [
         { name: isMarathi ? 'मुख्य पृष्ठ' : 'Home', link: '/' },
         { name: isMarathi ? 'परिपत्रक' : 'Circulars', link: '/Circulars' },
         { name: isMarathi ? 'गॅलरी' : 'Gallery', link: '/Gallery' },
-        {
-            name: isMarathi ? 'योजना' : 'Schemes',
-            submenus: [
-                { name: "अमृत – MCED लघुउद्योजक, स्वयंरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: "/schemes/mced" },
-                { name: "अमृत – विविध स्पर्धा परीक्षा पायाभूत प्रशिक्षण कार्यक्रम", link: "/schemes/exam-training" },
-                { name: "AIIMS, IIT, IIM, IIIT संस्थांमध्ये प्रवेश घेतलेल्या विद्यार्थ्यांना अर्थसहाय्य योजना", link: "/schemes/admission-assistance" },
-                {
-                    title: "UPSC स्पर्धा परीक्षा",
-                    submenu: [
-                        {
-                            title: "अभियांत्रिकी सेवा",
-                            subdetails: [
-                                { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/engineering/pre" },
-                                { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/engineering/main" }
-                            ]
-                        },
-                        {
-                            title: "नागरी सेवा",
-                            subdetails: [
-                                { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/civil/pre" },
-                                { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/civil/main" }
-                            ]
-                        },
-                        {
-                            title: "वन सेवा",
-                            subdetails: [
-                                { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/forest/pre" },
-                                { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/forest/main" }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    title: "MPSC च्या मुख्य परीक्षा",
-                    submenu: [
-                        { name: "अन्न व औषध प्रशासकीय सेवा मुख्य परीक्षा", link: "/schemes/mpsc/food-drug" },
-                        { name: "दिवाणी न्यायाधीश कनिष्ठ स्तर व न्याय दंडाधिकारी", link: "/schemes/mpsc/judicial" },
-                        { name: "निरीक्षक वैधमापन शास्त्र मुख्य परीक्षा", link: "/schemes/mpsc/inspector" },
-                        { name: "महाराष्ट्र अराजपत्रित गट-ब", link: "/schemes/mpsc/group-b" },
-                        { name: "महाराष्ट्र कृषी सेवा मुख्य परीक्षा", link: "/schemes/mpsc/agriculture" },
-                        { name: "महाराष्ट्र तांत्रिक अभियंता सेवा मुख्य परीक्षा", link: "/schemes/mpsc/technical-engineering" },
-                        { name: "महाराष्ट्र राज्यपत्रित नागरी सेवा संयुक्त पूर्व परीक्षा", link: "/schemes/mpsc/civil-pre" },
-                        { name: "महाराष्ट्र वन सेवा मुख्य परीक्षा", link: "/schemes/mpsc/forest" },
-                        { name: "महाराष्ट्र विद्युत अभियांत्रिकी सेवा मुख्य परीक्षा", link: "/schemes/mpsc/electrical" },
-                        { name: "महाराष्ट्र विद्युत व यांत्रिकी अभियांत्रिकी सेवा मुख्य परीक्षा", link: "/schemes/mpsc/electro-mechanical" },
-                        { name: "महाराष्ट्र स्थापत्य अभियांत्रिकी सेवा मुख्य परीक्षा", link: "/schemes/mpsc/civil-engineering" },
-                        { name: "राज्य सेवा मुख्य परीक्षा", link: "/schemes/mpsc/state" },
-                    ],
-                },
-                { name: "शासकीय संगणक टंकलेखन व लघुलेखन परीक्षा (GCC-TBC)", link: "/schemes/gcc-tbc" },
-                { name: "कृषि उद्योग प्रशिक्षण योजना", link: "/schemes/agri-training" },
-                { name: "स्वरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: "/schemes/self-employment" },
-                { name: "ड्रोन पायलट प्रशिक्षण योजना", link: "/schemes/drone-pilot" },
-                { name: "अमृत - CIPET कौशल्य विकास प्रशिक्षण", link: "/schemes/cipet" },
-                { name: "अमृत - NIELIT कौशल्य विकास प्रशिक्षण", link: "/schemes/nielit" },
-                { name: "आर्थिक साक्षरता प्रशिक्षण योजना", link: "/schemes/financial-literacy" },
-                { name: "अमृत सुवर्णिम प्रशिक्षण योजना", link: "/schemes/suvarnim" },
-                { name: "अमृत आयात-निर्यात प्रशिक्षण योजना", link: "/schemes/import-export" },
-                { name: "अमृत - बेकरी प्रशिक्षण योजना", link: "/schemes/bakery" },
-                { name: "तांत्रिक रोजगार प्रशिक्षण (IGTR) योजना", link: "/schemes/igtr" },
-                { name: "माहिती तंत्रज्ञान आणि इलेक्ट्रॉनिक्स तसेच उच्च कार्यक्षमता संगणक प्रशिक्षण (C-DAC)", link: "/schemes/cdac" },
-                { name: "अमृत - BHAU Incubation Program", link: "/schemes/bhau" },
-                { name: "अमृत - MSSU Incubation Program", link: "/schemes/mssu" },
-                { name: "अमृत - कलश (MKCL) अमृत सॉफ्ट स्किल व संगणक कौशल्य विकास योजना", link: "/schemes/mkcl" },
-                { name: "वैक्तिक कर्ज व्याज परतावा योजना", link: "/schemes/loan-interest" },
-                { name: "अमृत - स्वयं शिक्षण प्रोत्साहन योजना", link: "/schemes/self-learning" },
-            ]
-        },
+        { name: isMarathi ? 'योजना' : 'Schemes', submenus: schemes },
         { name: isMarathi ? 'वार्ता' : 'News', link: '/News' },
         { name: isMarathi ? 'अमृत दूरोत्सव २०२५' : 'Amrut Festival 2025', link: 'https://www.durgotsav.com/' },
         { name: isMarathi ? 'अमृत महाराष्ट्र' : 'Amrut Maharashtra', link: 'https://amrutmaharashtra.org/' },
@@ -201,7 +388,7 @@ export default function AmrutHeader() {
         { name: isMarathi ? 'ई-बुक' : 'E-Book', link: '/Book' },
         { name: isMarathi ? 'संपर्क साधा' : 'Contact Us', link: '/Contact' }
     ];
-    
+
     // Framer motion variants for dropdowns
     const dropdownVariants: Variants = {
         hidden: { opacity: 0, y: -10 },
@@ -224,13 +411,6 @@ export default function AmrutHeader() {
     };
 
     return (
-        <div
-            className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300 `}
-            style={{ fontSize: `${fontSize}px` }}
-        >
-            {/* --- Sub Header --- */}
-            <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-orange-50'} py-2 sm:py-3 px-2 sm:px-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-orange-200'}`}>
-  
         <div
             className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300 `}
             style={{ fontSize: `${fontSize}px` }}
@@ -480,193 +660,8 @@ export default function AmrutHeader() {
                 </div>
 
                 {/* --- Mobile Menu --- */}
-                <div className="lg:hidden flex items-center justify-between px-4 py-3">
-                    <span className="text-white font-medium">{isMarathi ? 'मेनू' : 'Menu'}</span>
-                    <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white p-2">
-                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
-
-                <AnimatePresence>
-                    {mobileMenuOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className={`${isDarkMode ? 'bg-gray-700' : 'bg-orange-700'} overflow-hidden`}
-                        >
-                            {menuStructure.map((menu, idx) => (
-                                <div key={idx}>
-                                    <div className="flex items-center justify-between">
-                                        <a
-                                            href={menu.link || '#'}
-                                            className="flex-1 px-4 py-3 text-white border-b border-orange-600"
-                                            onClick={(e) => {
-                                                if (menu.submenus) {
-                                                    e.preventDefault();
-                                                    setMobileNestedSubmenu(prev => ({
-                                                        menuIdx: prev.menuIdx === idx ? null : idx,
-                                                        subIdx: null
-                                                    }));
-                                                }
-                                            }}
-                                        >
-                                            {menu.name}
-                                        </a>
-                                        {menu.submenus && (
-                                            <motion.button
-                                                onClick={() => setMobileNestedSubmenu(prev => ({
-                                                    menuIdx: prev.menuIdx === idx ? null : idx,
-                                                    subIdx: null
-                                                }))}
-                                                className="px-4 py-3 text-white border-b border-orange-600"
-                                                animate={{ rotate: mobileNestedSubmenu.menuIdx === idx ? 180 : 0 }}
-                                                transition={{ duration: 0.2 }}
-                                            >
-                                                <ChevronDown size={20} />
-                                            </motion.button>
-                                        )}
-                                    </div>
-
-                                    <AnimatePresence>
-                                        {menu.submenus && mobileNestedSubmenu.menuIdx === idx && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: -10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                transition={{ duration: 0.25 }}
-                                                className={`${isDarkMode ? 'bg-gray-600' : 'bg-orange-600'}`}
-                                            >
-                                                {menu.submenus.map((submenu, subIdx) => {
-                                                    const isNested = isSubMenuItem(submenu);
-                                                    const displayText = isNested ? submenu.title : submenu;
-
-                                                    return (
-                                                        <div key={subIdx}>
-                                                            <div className="flex items-center justify-between">
-                                                                <a
-                                                                    href="#"
-                                                                    className="flex-1 px-6 py-2 text-white text-sm border-b border-orange-500 hover:bg-orange-500 transition-colors"
-                                                                    onClick={(e) => {
-                                                                        if (isNested && submenu.submenu) {
-                                                                            e.preventDefault();
-                                                                            setMobileNestedSubmenu(prev => ({
-                                                                                menuIdx: prev.menuIdx,
-                                                                                subIdx: prev.subIdx === subIdx ? null : subIdx
-                                                                            }));
-                                                                        }
-                                                                    }}
-                                                                >
-                                                                    {displayText}
-                                                                </a>
-                                                                {isNested && submenu.submenu && (
-                                                                    <motion.button
-                                                                        onClick={() => setMobileNestedSubmenu(prev => ({
-                                                                            menuIdx: prev.menuIdx,
-                                                                            subIdx: prev.subIdx === subIdx ? null : subIdx
-                                                                        }))}
-                                                                        className="px-4 py-2 text-white border-b border-orange-500"
-                                                                        animate={{ rotate: mobileNestedSubmenu.subIdx === subIdx ? 180 : 0 }}
-                                                                        transition={{ duration: 0.2 }}
-                                                                    >
-                                                                        <ChevronDown size={16} />
-                                                                    </motion.button>
-                                                                )}
-                                                            </div>
-
-                                                            {/* Second Level Mobile Submenu */}
-                                                            <AnimatePresence>
-                                                                {isNested && submenu.submenu && mobileNestedSubmenu.subIdx === subIdx && (
-                                                                    <motion.div
-                                                                        initial={{ opacity: 0, y: -10 }}
-                                                                        animate={{ opacity: 1, y: 0 }}
-                                                                        exit={{ opacity: 0, y: -10 }}
-                                                                        transition={{ duration: 0.25 }}
-                                                                        className={`${isDarkMode ? 'bg-gray-500' : 'bg-orange-500'}`}
-                                                                    >
-                                                                        {submenu.submenu.map((nestedItem, nestedIdx) => {
-                                                                            const hasSubdetails = isSubDetail(nestedItem);
-                                                                            const nestedText = hasSubdetails ? nestedItem.title : nestedItem;
-
-                                                                            return (
-                                                                                <div key={nestedIdx}>
-                                                                                    <div className="flex items-center justify-between">
-                                                                                        <a
-                                                                                            href="#"
-                                                                                            className="flex-1 px-8 py-2 text-white text-sm border-b border-orange-400 hover:bg-orange-400 transition-colors"
-                                                                                            onClick={(e) => {
-                                                                                                if (hasSubdetails) {
-                                                                                                    e.preventDefault();
-                                                                                                    setMobileFinalSubmenu(prev => ({
-                                                                                                        menuIdx: prev.menuIdx,
-                                                                                                        subIdx: prev.subIdx,
-                                                                                                        nestedIdx: prev.nestedIdx === nestedIdx ? null : nestedIdx
-                                                                                                    }));
-                                                                                                }
-                                                                                            }}
-                                                                                        >
-                                                                                            {nestedText}
-                                                                                        </a>
-                                                                                        {hasSubdetails && (
-                                                                                            <motion.button
-                                                                                                onClick={() => setMobileFinalSubmenu(prev => ({
-                                                                                                    menuIdx: prev.menuIdx,
-                                                                                                    subIdx: prev.subIdx,
-                                                                                                    nestedIdx: prev.nestedIdx === nestedIdx ? null : nestedIdx
-                                                                                                }))}
-                                                                                                className="px-4 py-2 text-white border-b border-orange-400"
-                                                                                                animate={{ rotate: mobileFinalSubmenu.nestedIdx === nestedIdx ? 180 : 0 }}
-                                                                                                transition={{ duration: 0.2 }}
-                                                                                            >
-                                                                                                <ChevronDown size={16} />
-                                                                                            </motion.button>
-                                                                                        )}
-                                                                                    </div>
-
-                                                                                    {/* Third Level Mobile Submenu */}
-                                                                                    <AnimatePresence>
-                                                                                        {hasSubdetails && mobileFinalSubmenu.nestedIdx === nestedIdx && (
-                                                                                            <motion.div
-                                                                                                initial={{ opacity: 0, y: -10 }}
-                                                                                                animate={{ opacity: 1, y: 0 }}
-                                                                                                exit={{ opacity: 0, y: -10 }}
-                                                                                                transition={{ duration: 0.25 }}
-                                                                                                className={`${isDarkMode ? 'bg-gray-400' : 'bg-orange-400'}`}
-                                                                                            >
-                                                                                                {nestedItem.subdetails.map((detail, detailIdx) => (
-                                                                                                    <a
-                                                                                                        key={detailIdx}
-                                                                                                        href="#"
-                                                                                                        className="block px-10 py-2 text-white text-sm border-b border-orange-300 hover:bg-orange-300 transition-colors"
-                                                                                                    >
-                                                                                                        {detail}
-                                                                                                    </a>
-                                                                                                ))}
-                                                                                            </motion.div>
-                                                                                        )}
-                                                                                    </AnimatePresence>
-                                                                                </div>
-                                                                            );
-                                                                        })}
-                                                                    </motion.div>
-                                                                )}
-                                                            </AnimatePresence>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            ))}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {renderMobileMenu()}
             </nav>
         </div>
-        </div>
-        </div>
-
     );
 }

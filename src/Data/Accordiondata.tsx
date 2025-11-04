@@ -1,4 +1,4 @@
-export default const  submenus = [
+export  const  submenus = [
     { 
         title: "अमृत – MCED लघुउद्योजक, स्वयंरोजगार प्रोत्साहन व प्रशिक्षण योजना",
         details: {
