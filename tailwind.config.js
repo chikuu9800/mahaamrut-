@@ -8,7 +8,6 @@ export default {
     extend: {
       fontFamily: {
         playfair: ['PlayfairDisplay', 'serif'],
-        martel: ['Martel' ,'sans-serif'], 
       },
     },
   },

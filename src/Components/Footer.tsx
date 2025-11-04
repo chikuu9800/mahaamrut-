@@ -64,7 +64,7 @@ const Footer = () => {
 
   return (
     <footer
-      style={{ fontFamily: 'Martel, serif' }}
+      style={{ fontFamily: 'baloo, serif' }}
       ref={footerRef}
       className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-blue-900 text-white mt-auto"
     >

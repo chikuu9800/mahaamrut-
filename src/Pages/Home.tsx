@@ -91,7 +91,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 font-martel" style={{fontFamily: 'Martel, serif'}}>
+    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 font-martel" style={{fontFamily: 'baloo, serif' }}>
     
 
       {/* Animated background */}
