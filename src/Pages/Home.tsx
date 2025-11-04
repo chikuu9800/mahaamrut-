@@ -244,6 +244,7 @@ import { ChevronDown } from "lucide-react";
 import Slider from "../Components/Slider";
 import AboutUs from "../Components/Aboutus";
 import InspirationCarousel from "../Components/InspirationCarousel";
+import Contactus from "../Components/Contactus";
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -330,7 +331,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 mt-[200px]">
     
 
       {/* Animated background */}
@@ -514,6 +515,8 @@ const Home = () => {
       <Slider />
       <AboutUs/>
       <InspirationCarousel />
+      <Contactus />
+
     </div>
   );
 };

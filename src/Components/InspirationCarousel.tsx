@@ -11,13 +11,13 @@ const quotes = [
   },
   {
     image: "/images/Carousel/images-1-150x150.jpg",
-    name: "स्वामी विवेकानंद",
+    name: "छत्रपती शिवाजी महाराज",
     quote:
       " हिंदवी स्वराज्याचे संस्थापक.",
   },
   {
     image: "/images/Carousel/images-150x150.jpg",
-    name: "डॉ. बाबासाहेब आंबेडकर",
+    name: "स्वामी विवेकानंद",
     quote: "आध्यात्मिक गुरू, समाजसुधारक.",
   },
 ];

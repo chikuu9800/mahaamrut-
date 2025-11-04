@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Search, Sun, Moon, Plus, Minus, RotateCcw,
     Facebook, Twitter, Instagram, Youtube, ChevronDown, Menu, X
@@ -6,6 +6,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants, Easing } from 'framer-motion';
 import CircleSider from './Circlesider';
+import { useLanguage } from "../Context/AuthContext.tsx";
 
 interface SubDetail {
     title: string;
@@ -28,17 +29,17 @@ interface MenuItem {
 export default function AmrutHeader() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [fontSize, setFontSize] = useState(16);
-    const [isMarathi, setIsMarathi] = useState(true);
     const [openMenu, setOpenMenu] = useState<number | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [mobileNestedSubmenu, setMobileNestedSubmenu] = useState<{menuIdx: number | null, subIdx: number | null}>({ menuIdx: null, subIdx: null });
-    const [mobileFinalSubmenu, setMobileFinalSubmenu] = useState<{menuIdx: number | null, subIdx: number | null, nestedIdx: number | null}>({ menuIdx: null, subIdx: null, nestedIdx: null });
-
+    const [mobileNestedSubmenu, setMobileNestedSubmenu] = useState<{ menuIdx: number | null, subIdx: number | null }>({ menuIdx: null, subIdx: null });
+    const [mobileFinalSubmenu, setMobileFinalSubmenu] = useState<{ menuIdx: number | null, subIdx: number | null, nestedIdx: number | null }>({ menuIdx: null, subIdx: null, nestedIdx: null });
+    const { isMarathi, toggleLanguage } = useLanguage();
     const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
     const increaseFontSize = () => setFontSize(prev => Math.min(prev + 2, 24));
     const decreaseFontSize = () => setFontSize(prev => Math.max(prev - 2, 12));
     const resetFontSize = () => setFontSize(16);
-    const toggleLanguage = () => setIsMarathi(!isMarathi);
+   
+
 
     // Type guards
     function isSubMenuItem(item: SchemeItem): item is SubMenuItem {
@@ -125,18 +126,18 @@ export default function AmrutHeader() {
     // Framer motion variants for dropdowns
     const dropdownVariants: Variants = {
         hidden: { opacity: 0, y: -10 },
-        visible: { 
-            opacity: 1, 
+        visible: {
+            opacity: 1,
             y: 0,
-            transition: { 
+            transition: {
                 duration: 0.25,
                 ease: [0.4, 0, 0.2, 1] as Easing
             }
         },
-        exit: { 
-            opacity: 0, 
+        exit: {
+            opacity: 0,
             y: -8,
-            transition: { 
+            transition: {
                 duration: 0.2,
                 ease: [0.4, 0, 1, 1] as Easing
             }
@@ -145,7 +146,7 @@ export default function AmrutHeader() {
 
     return (
         <div
-            className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300`}
+            className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300 shadow-md fixed top-0 left-0 w-full z-50`}
             style={{ fontSize: `${fontSize}px` }}
         >
             {/* --- Sub Header --- */}
@@ -197,7 +198,7 @@ export default function AmrutHeader() {
                             <User size={14} />
                             <span>{translations.login}</span>
                         </button> */}
-                      
+
                     </div>
                     <CircleSider />
                 </div>
@@ -242,7 +243,7 @@ export default function AmrutHeader() {
                                                 animate="visible"
                                                 exit="exit"
                                                 className="fixed w-96 bg-gray-800 shadow-xl z-50 max-h-[200px] overflow-y-auto overflow-x-hidden rounded-sm"
-                                                style={{ 
+                                                style={{
                                                     top: 'var(--menu-top)',
                                                     left: 'var(--menu-left)'
                                                 }}
@@ -250,10 +251,10 @@ export default function AmrutHeader() {
                                                 {menu.submenus.map((submenu, subIdx) => {
                                                     const isNested = isSubMenuItem(submenu);
                                                     const displayText = isNested ? submenu.title : submenu;
-                                                    
+
                                                     return (
-                                                        <div 
-                                                            key={subIdx} 
+                                                        <div
+                                                            key={subIdx}
                                                             className="relative group/submenu"
                                                             onMouseEnter={(e) => {
                                                                 const rect = e.currentTarget.getBoundingClientRect();
@@ -270,22 +271,22 @@ export default function AmrutHeader() {
                                                                     <ChevronDown size={16} className="transform -rotate-90 flex-shrink-0 opacity-75" />
                                                                 )}
                                                             </a>
-                                                            
+
                                                             {/* Nested submenu */}
                                                             {isNested && submenu.submenu && (
-                                                                <div 
+                                                                <div
                                                                     className="fixed w-96 bg-gray-800 shadow-xl opacity-0 invisible group-hover/submenu:opacity-100 group-hover/submenu:visible transition-all duration-200 max-h-[200px] overflow-y-auto z-[51]"
-                                                                    style={{ 
+                                                                    style={{
                                                                         top: 'var(--submenu-top)',
                                                                         left: 'var(--submenu-left)'
                                                                     }}
                                                                 >
                                                                     {submenu.submenu.map((nestedItem, nestedIdx) => {
                                                                         const hasSubdetails = isSubDetail(nestedItem);
-                                                                        
+
                                                                         return (
-                                                                            <div 
-                                                                                key={nestedIdx} 
+                                                                            <div
+                                                                                key={nestedIdx}
                                                                                 className="relative group/nested"
                                                                                 onMouseEnter={(e) => {
                                                                                     const rect = e.currentTarget.getBoundingClientRect();
@@ -302,12 +303,12 @@ export default function AmrutHeader() {
                                                                                         <ChevronDown size={16} className="transform -rotate-90 flex-shrink-0 opacity-75" />
                                                                                     )}
                                                                                 </a>
-                                                                                
+
                                                                                 {/* Subdetails level */}
                                                                                 {hasSubdetails && (
-                                                                                    <div 
+                                                                                    <div
                                                                                         className="fixed w-96 bg-gray-800 shadow-xl opacity-0 invisible group-hover/nested:opacity-100 group-hover/nested:visible transition-all duration-200 max-h-[200px] overflow-y-auto z-[52]"
-                                                                                        style={{ 
+                                                                                        style={{
                                                                                             top: 'var(--nested-top)',
                                                                                             left: 'var(--nested-left)'
                                                                                         }}
