@@ -1,63 +1,89 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useParams } from 'react-router-dom';
+import { Mockdata } from '../Data/MockData';
+import { useState } from 'react';
 
 const SchemeDetails = () => {
-  const { title } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams();
+  const [activeTab, setActiveTab] = useState(0);
+  const scheme = Mockdata.find(item => item.id === Number(id));
 
-  if (!title) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600">योजना सापडली नाही</h1>
-          <button 
-            onClick={() => navigate('/')}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            मागे जा
-          </button>
-        </div>
-      </div>
-    );
+  if (!scheme) {
+    return <div className="p-4">Scheme not found</div>;
   }
 
+  const renderTabContent = (tab: any) => {
+    if (tab.button) {
+      return (
+        <div className="flex justify-center items-center p-8">
+          <a 
+            href={tab.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-orange-600 text-white px-6 py-3 rounded-md hover:bg-orange-700 transition-colors"
+          >
+            {tab.button}
+          </a>
+        </div>
+      );
+    }
+
+    if (tab.details) {
+      return (
+        <div className="space-y-6">
+          <section className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-2">Description</h2>
+            <p className="text-gray-700">{tab.details.description}</p>
+          </section>
+
+          <section className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-2">Eligibility</h2>
+            <p className="text-gray-700">{tab.details.eligibility}</p>
+          </section>
+
+          <section className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-2">Benefits</h2>
+            <p className="text-gray-700">{tab.details.benefits}</p>
+          </section>
+
+          <section className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-2">Application Process</h2>
+            <p className="text-gray-700">{tab.details.applicationProcess}</p>
+          </section>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen p-8"
-    >
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
-        <motion.h1 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-3xl font-bold text-blue-800 mb-6 font-martel"
-        >
-          {decodeURIComponent(title)}
-        </motion.h1>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="prose lg:prose-xl font-martel"
-        >
-          <p className="text-gray-700">
-            {/* Content will be expanded based on scheme details */}
-            ही योजना महाराष्ट्र शासनाच्या महाआमृत कार्यक्रमाचा एक महत्वपूर्ण भाग आहे. अधिक माहितीसाठी कृपया संपर्क साधा.
-          </p>
-        </motion.div>
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          onClick={() => navigate('/')}
-          className="mt-8 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-martel"
-        >
-          मागे जा
-        </motion.button>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">{scheme.title}</h1>
+      
+      {/* Tabs */}
+      <div className="mb-6 border-b border-gray-200">
+        <div className="flex flex-wrap -mb-px">
+          {scheme.options.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(index)}
+              className={`inline-block py-4 px-6 text-sm font-medium ${
+                activeTab === index
+                  ? 'text-orange-600 border-b-2 border-orange-600'
+                  : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent'
+              }`}
+            >
+              {option.name}
+            </button>
+          ))}
+        </div>
       </div>
-    </motion.div>
+
+      {/* Tab Content */}
+      <div className="tab-content">
+        {renderTabContent(scheme.options[activeTab])}
+      </div>
+    </div>
   );
 };
 

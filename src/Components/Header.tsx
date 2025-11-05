@@ -1,30 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-    Search, Sun, Moon, ChevronDown, Menu, X,
+    Search, ChevronDown, Menu, X,
     Facebook, Twitter, Instagram, Youtube
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants, Easing } from 'framer-motion';
 import CircleSider from './Circlesider';
 import { useLanguage } from "../Context/AuthContext";
-
-interface SchemeDetail {
-    name: string;
-    link: string;
-}
-
-interface SubDetail {
-    title: string;
-    subdetails: SchemeDetail[];
-}
-
-interface SubMenuItem {
-    title: string;
-    submenu: (SchemeDetail | SubDetail)[];
-}
-
-type SchemeItem = SchemeDetail | SubMenuItem;
+import type { SchemeDetail, SubDetail, SubMenuItem, SchemeItem } from '../types';
 
 interface MenuItem {
     name: string;
@@ -39,56 +23,55 @@ interface LanguageContext {
 
 // Schemes array definition
 const schemes: SchemeItem[] = [
-    { name: "अमृत – MCED लघुउद्योजक, स्वयंरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: "/schemes/mced" },
-    { name: "अमृत – विविध स्पर्धा परीक्षा पायाभूत प्रशिक्षण कार्यक्रम", link: "/schemes/exam-training" },
-    { name: "AIIMS, IIT, IIM, IIIT संस्थांमध्ये प्रवेश घेतलेल्या विद्यार्थ्यांना अर्थसहाय्य योजना", link: "/schemes/admission-assistance" },
+    { name: "अमृत – MCED लघुउद्योजक, स्वयंरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: `/scheme/1` },
+    { name: "अमृत – विविध स्पर्धा परीक्षा पायाभूत प्रशिक्षण कार्यक्रम", link: `/scheme/2` },
+    { name: "AIIMS, IIT, IIM, IIIT संस्थांमध्ये प्रवेश घेतलेल्या विद्यार्थ्यांना अर्थसहाय्य योजना", link: `/scheme/3` },
     {
         title: "UPSC स्पर्धा परीक्षा",
         submenu: [
             {
                 title: "अभियांत्रिकी सेवा",
                 subdetails: [
-                    { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/engineering/pre" },
-                    { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/engineering/main" }
+                    { name: "पूर्व परीक्षा उत्तीर्ण", link: `/scheme/4` },
+                    { name: "मुख्य परीक्षा उत्तीर्ण", link: `/scheme/5` }
                 ]
             },
             {
                 title: "नागरी सेवा",
                 subdetails: [
-                    { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/civil/pre" },
-                    { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/civil/main" }
+                    { name: "पूर्व परीक्षा उत्तीर्ण", link: `/scheme/6` },
+                    { name: "मुख्य परीक्षा उत्तीर्ण", link: `/scheme/7` }
                 ]
             },
             {
                 title: "वन सेवा",
                 subdetails: [
-                    { name: "पूर्व परीक्षा उत्तीर्ण", link: "/schemes/upsc/forest/pre" },
-                    { name: "मुख्य परीक्षा उत्तीर्ण", link: "/schemes/upsc/forest/main" }
+                    { name: "पूर्व परीक्षा उत्तीर्ण", link: `/scheme/8` },
+                    { name: "मुख्य परीक्षा उत्तीर्ण", link: `/scheme/9` }
                 ]
             }
         ]
     },
-    { name: "शासकीय संगणक टंकलेखन व लघुलेखन परीक्षा (GCC-TBC)", link: "/schemes/gcc-tbc" },
-    { name: "कृषि उद्योग प्रशिक्षण योजना", link: "/schemes/agri-training" },
-    { name: "स्वरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: "/schemes/self-employment" },
-    { name: "ड्रोन पायलट प्रशिक्षण योजना", link: "/schemes/drone-pilot" },
-    { name: "अमृत - CIPET कौशल्य विकास प्रशिक्षण", link: "/schemes/cipet" },
-    { name: "अमृत - NIELIT कौशल्य विकास प्रशिक्षण", link: "/schemes/nielit" },
-    { name: "आर्थिक साक्षरता प्रशिक्षण योजना", link: "/schemes/financial-literacy" },
-    { name: "अमृत सुवर्णिम प्रशिक्षण योजना", link: "/schemes/suvarnim" },
-    { name: "अमृत आयात-निर्यात प्रशिक्षण योजना", link: "/schemes/import-export" },
-    { name: "अमृत - बेकरी प्रशिक्षण योजना", link: "/schemes/bakery" },
-    { name: "तांत्रिक रोजगार प्रशिक्षण (IGTR) योजना", link: "/schemes/igtr" },
-    { name: "माहिती तंत्रज्ञान आणि इलेक्ट्रॉनिक्स तसेच उच्च कार्यक्षमता संगणक प्रशिक्षण (C-DAC)", link: "/schemes/cdac" },
-    { name: "अमृत - BHAU Incubation Program", link: "/schemes/bhau" },
-    { name: "अमृत - MSSU Incubation Program", link: "/schemes/mssu" },
-    { name: "अमृत - कलश (MKCL) अमृत सॉफ्ट स्किल व संगणक कौशल्य विकास योजना", link: "/schemes/mkcl" },
-    { name: "वैक्तिक कर्ज व्याज परतावा योजना", link: "/schemes/loan-interest" },
-    { name: "अमृत - स्वयं शिक्षण प्रोत्साहन योजना", link: "/schemes/self-learning" },
+    { name: "शासकीय संगणक टंकलेखन व लघुलेखन परीक्षा (GCC-TBC)", link: `/scheme/10` },
+    { name: "कृषि उद्योग प्रशिक्षण योजना", link: `/scheme/11` },
+    { name: "स्वरोजगार प्रोत्साहन व प्रशिक्षण योजना", link: `/scheme/12` },
+    { name: "ड्रोन पायलट प्रशिक्षण योजना", link: `/scheme/13` },
+    { name: "अमृत - CIPET कौशल्य विकास प्रशिक्षण", link: `/scheme/14` },
+    { name: "अमृत - NIELIT कौशल्य विकास प्रशिक्षण", link: `/scheme/15` },
+    { name: "आर्थिक साक्षरता प्रशिक्षण योजना", link: `/scheme/16` },
+    { name: "अमृत सुवर्णिम प्रशिक्षण योजना", link: `/scheme/17` },
+    { name: "अमृत आयात-निर्यात प्रशिक्षण योजना", link: `/scheme/18` },
+    { name: "अमृत - बेकरी प्रशिक्षण योजना", link: `/scheme/19` },
+    { name: "तांत्रिक रोजगार प्रशिक्षण (IGTR) योजना", link: `/scheme/20` },
+    { name: "माहिती तंत्रज्ञान आणि इलेक्ट्रॉनिक्स तसेच उच्च कार्यक्षमता संगणक प्रशिक्षण (C-DAC)", link: `/scheme/21` },
+    { name: "अमृत - BHAU Incubation Program", link: `/scheme/22` },
+    { name: "अमृत - MSSU Incubation Program", link: `/scheme/23` },
+    { name: "अमृत - कलश (MKCL) अमृत सॉफ्ट स्किल व संगणक कौशल्य विकास योजना", link: `/scheme/24` },
+    { name: "वैक्तिक कर्ज व्याज परतावा योजना", link: `/scheme/25` },
+    { name: "अमृत - स्वयं शिक्षण प्रोत्साहन योजना", link: `/scheme/26` },
 ];
 
 export default function AmrutHeader() {
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const fontSize = 16;
     const [openMenu, setOpenMenu] = useState<number | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -102,7 +85,6 @@ export default function AmrutHeader() {
         nestedIndex: null
     });
     const { isMarathi, toggleLanguage } = useLanguage() as LanguageContext;
-    const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
     // Type guards
     function isSubMenuItem(item: SchemeItem): item is SubMenuItem {
@@ -147,8 +129,8 @@ export default function AmrutHeader() {
         <div className="lg:hidden">
             <div className="flex items-center justify-between px-4 py-3">
                 <span className="text-white font-medium">{isMarathi ? 'मेनू' : 'Menu'}</span>
-                <button 
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+                <button
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     className="text-white p-2 hover:bg-orange-700 rounded-md transition-colors"
                     aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 >
@@ -242,8 +224,8 @@ export default function AmrutHeader() {
                                                                         className="px-4 py-3 text-white hover:bg-orange-800 transition-colors"
                                                                     >
                                                                         <motion.span
-                                                                            animate={{ 
-                                                                                rotate: activeSubmenu.submenuIndex === subIdx ? 180 : 0 
+                                                                            animate={{
+                                                                                rotate: activeSubmenu.submenuIndex === subIdx ? 180 : 0
                                                                             }}
                                                                             transition={{ duration: 0.2 }}
                                                                         >
@@ -293,8 +275,8 @@ export default function AmrutHeader() {
                                                                                                 className="px-4 py-3 text-white hover:bg-orange-900 transition-colors"
                                                                                             >
                                                                                                 <motion.span
-                                                                                                    animate={{ 
-                                                                                                        rotate: activeSubmenu.nestedIndex === nestedIdx ? 180 : 0 
+                                                                                                    animate={{
+                                                                                                        rotate: activeSubmenu.nestedIndex === nestedIdx ? 180 : 0
                                                                                                     }}
                                                                                                     transition={{ duration: 0.2 }}
                                                                                                 >
@@ -381,7 +363,7 @@ export default function AmrutHeader() {
         { name: isMarathi ? 'गॅलरी' : 'Gallery', link: '/Gallery' },
         { name: isMarathi ? 'योजना' : 'Schemes', submenus: schemes },
         { name: isMarathi ? 'वार्ता' : 'News', link: '/News' },
-        { name: isMarathi ? 'अमृत दूरोत्सव २०२५' : 'Amrut Festival 2025', link: 'https://www.durgotsav.com/' },
+        { name: isMarathi ? 'अमृत दुर्गोत्सव २०२५' : 'Amrut Festival 2025', link: 'https://www.durgotsav.com/' },
         { name: isMarathi ? 'अमृत महाराष्ट्र' : 'Amrut Maharashtra', link: 'https://amrutmaharashtra.org/' },
         { name: isMarathi ? 'अमृत पथ' : 'Amrut Path', link: 'https://amrutpeth.com/' },
         { name: isMarathi ? 'लाभार्थी' : 'Beneficiaries', link: '/Beneficiaries' },
@@ -411,12 +393,9 @@ export default function AmrutHeader() {
     };
 
     return (
-        <div
-            className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300 `}
-            style={{ fontSize: `${fontSize}px` }}
-        >
+        <div className="bg-white text-gray-900 transition-colors duration-300" style={{ fontSize: `${fontSize}px` }}>
             {/* --- Sub Header --- */}
-            <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-orange-50'} py-2 sm:py-3 px-2 sm:px-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-orange-200'}`}>
+            <div className="bg-orange-50 py-2 sm:py-3 px-2 sm:px-4 border-b border-orange-200">
                 <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3">
                     {/* Logo & Title */}
                     <div className="flex flex-col sm:flex-row items-center  sm:gap-3 md:gap-4 w-full lg:flex-1 lg:min-w-0">
@@ -427,7 +406,7 @@ export default function AmrutHeader() {
                             <h2 className="text-sm sm:text-base lg:text-[13px] font-bold text-orange-600 leading-tight break-words font-martel" style={{ fontFamily: 'poppins, serif' }}>
                                 महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत)
                             </h2>
-                            <h3 className={`text-xs sm:text-sm md:text-base lg:text-[13px]  ${isDarkMode ? 'text-gray-200' : 'text-black'} mt-1 leading-tight break-words font-playfair font-[600]`}>
+                            <h3 className="text-xs sm:text-sm md:text-base lg:text-[13px] text-black mt-1 leading-tight break-words font-playfair font-[600]">
                                 ACADEMY OF MAHARASHTRA RESEARCH, UPLIFTMENT AND TRAINING (AMRUT)
                             </h3>
                         </div>
@@ -435,9 +414,7 @@ export default function AmrutHeader() {
 
                     {/* Controls */}
                     <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-wrap justify-center lg:justify-end">
-                        <button onClick={toggleDarkMode}>{isDarkMode ? <Sun size={16} /> : <Moon size={16} />}</button>
                         <button className="p-2"><Search size={16} /></button>
-
                         <button
                             onClick={toggleLanguage}
                             className="px-2 md:px-3 py-1 rounded bg-orange-600 text-white text-xs md:text-sm font-medium hover:bg-orange-700 transition-colors"
@@ -450,7 +427,7 @@ export default function AmrutHeader() {
             </div>
 
             {/* --- Main Navigation --- */}
-            <nav className={`${isDarkMode ? 'bg-gray-800' : 'bg-orange-600'} shadow-lg`} style={{ fontFamily: 'poppins, serif' }}>
+            <nav className="bg-orange-600 shadow-lg" style={{ fontFamily: 'poppins, serif' }}>
                 <div className="max-w-8xl mx-auto flex justify-between items-center">
                     {/* Desktop Menu */}
                     <ul className="hidden lg:flex flex-wrap font-martel">

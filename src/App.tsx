@@ -11,27 +11,25 @@ import Beneficiaries from './Pages/Beneficiaries'
 import Circulars from './Pages/Circulars'
 import Gallery from './Pages/Gallery'
 import News from './Pages/News'
+import Newsdetails from './Pages/Newsdetails'
 
 function App() {
   return (
     <Router>
-      {/* Header and Footer should be outside Routes */}
       <Header />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tab/:id" element={<TabDetails />} />
-        <Route path="/scheme/:title" element={<SchemeDetails />} />
+        <Route path="/scheme/:id" element={<SchemeDetails />} />
         <Route path="/Contact" element={<Contactus />} />
         <Route path="/Book" element={<Book />} />
         <Route path="/Beneficiaries" element={<Beneficiaries />} />
         <Route path="/Circulars" element={<Circulars />} />
         <Route path="/Gallery" element={<Gallery />} />
         <Route path="/News" element={<News />} />
-
+        <Route path="/News/:id" element={<Newsdetails />} />
 
       </Routes>
-
       <Footer />
     </Router>
   )
