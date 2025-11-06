@@ -1,14 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
-import { LanguageProvider } from './Context/AuthContext.tsx'
+import App from './App.js'
 
-createRoot(document.getElementById('root')!).render(
-  <LanguageProvider>
-    <StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <App />
   </StrictMode>,
-  </LanguageProvider>
-  
 )

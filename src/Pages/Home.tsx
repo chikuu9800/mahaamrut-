@@ -1,24 +1,29 @@
-import React from "react";
-import Accordion from "../Components/Accordion"
-import Slider from "../Components/Slider";
-import AboutUs from "../Components/Aboutus";
-import InspirationCarousel from "../Components/InspirationCarousel";
-import Contactus from "../Components/Contactus";
+import React from 'react'
+import EmbassyBanner from '../Components/Banner'
+import SLogon from '../Components/SLogon'
+import Tabs from '../Components/Tabs'
+import AnimatedMap from '../Components/AnimatedMap'
+import MaharashtraShowcase from '../Components/SliderMaha'
+import Footer from '../Components/Footer'
+import AmrutStats from '../Components/Dynamic'
+import AmrutMissionVision from '../Components/Vison'
+// import YojanaSlider from '../Components/Slider'
+
 
 const Home = () => {
- 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 font-martel" style={{fontFamily: 'baloo, serif' }}>
-    
-<Accordion/>
-     
-      <Slider />
-      <AboutUs/>
-      <InspirationCarousel />
-      <Contactus />
-
+    <div className='overflow-hidden' >
+      <EmbassyBanner/>
+      <AmrutStats/>
+      <SLogon/>
+      <Tabs/>
+      {/* <YojanaSlider/> */}
+      <AnimatedMap/>
+      <AmrutMissionVision/>
+      <MaharashtraShowcase/>
+      <Footer/>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
