@@ -50,14 +50,16 @@ export default function AmritMahotsavSection() {
 
   return (
     <section
-      className="relative w-full py-10 md:py-16 px-4 md:px-10 overflow-hidden rounded-3xl shadow-xl"
+      className="relative w-[80%] m-auto mt-[50px] mb-10 py-5 md:py-16 px-4 md:px-10 overflow-hidden rounded-3xl shadow-2xl"
       style={{
-        background: "linear-gradient(120deg, #fff6e5 0%, #ffe0b2 50%, #fff8f0 100%)",
+        background:
+          "linear-gradient(90deg, #ffb26b 0%, #fff3e0 50%, #ffb26b 100%), linear-gradient(to bottom, rgba(255,140,0,0.15), rgba(255,102,0,0.25))",
+        backgroundBlendMode: "overlay",
       }}
     >
       {/* Subtle Animated Glow */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-orange-200/30 via-orange-100/20 to-orange-50/10"
+        className="absolute inset-0 bg-gradient-to-br from-orange-200/40 via-orange-100/20 to-orange-50/10"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         style={{ backgroundSize: "200% 200%" }}
@@ -74,12 +76,7 @@ export default function AmritMahotsavSection() {
         >
           {/* Title Block */}
           <div className="mb-6">
-            <h3
-              className="text-sm md:text-base font-semibold tracking-widest text-orange-700 uppercase mb-2"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              आजादी का अमृत महोत्सव
-            </h3>
+           
             <h2
               className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-900 leading-snug mb-3"
               style={{ fontFamily: "Baloo, serif" }}
@@ -91,12 +88,13 @@ export default function AmritMahotsavSection() {
             </p>
           </div>
 
-          {/* Fort Image */}
-          <div className="flex justify-center">
+          {/* Fort Image with Blend */}
+          <div className="flex justify-center relative">
+            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-orange-200/60 via-transparent to-transparent z-0"></div>
             <img
-              src="/images/Gemini_Generated_Image_tm84iqtm84iqtm84-removebg-preview (1).png"
+              src="/images/wmremove-transformed (1) (1).png"
               alt="Shaniwarwada Fort"
-              className="w-[80%] md:w-[75%] lg:w-[85%] object-contain drop-shadow-[0_25px_60px_rgba(255,140,0,0.3)]"
+              className="relative z-10 w-[80%] md:w-[75%] lg:w-[85%] object-contain mix-blend-multiply opacity-95 drop-shadow-[0_25px_60px_rgba(255,140,0,0.3)]"
             />
           </div>
         </motion.div>
@@ -111,7 +109,7 @@ export default function AmritMahotsavSection() {
         >
           {/* Main Slide */}
           <div className="relative w-full max-w-lg mx-auto lg:mx-0">
-            <div className="overflow-hidden rounded-2xl shadow-lg border border-orange-200">
+            <div className="overflow-hidden rounded-2xl shadow-lg border border-orange-400 bg-white/60 backdrop-blur-sm">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={index}
@@ -121,7 +119,7 @@ export default function AmritMahotsavSection() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className="w-full h-56 md:h-72 object-cover"
+                  className="w-full h-56 md:h-72 object-cover rounded-2xl"
                 />
               </AnimatePresence>
             </div>
