@@ -94,7 +94,7 @@ export default function AmritMahotsavSection() {
           {/* Fort Image */}
           <div className="flex justify-center">
             <img
-              src="/images/Gemini_Generated_Image_tm84iqtm84iqtm84-removebg-prGemini_Generated_Image_19nf5419nf5419nf.png"
+              src="/images/Gemini_Generated_Image_tm84iqtm84iqtm84-removebg-preview (1).png"
               alt="Shaniwarwada Fort"
               className="w-[80%] md:w-[75%] lg:w-[85%] object-contain drop-shadow-[0_25px_60px_rgba(255,140,0,0.3)]"
             />
