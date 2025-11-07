@@ -355,52 +355,67 @@ export default function Header() {
         <div className="bg-white">
             {/* Sub Header - Made static */}
             <div className="bg-white z-50">
-                <div className="max-w-7xl mx-auto px-4 py-3">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        {/* Logo Section */}
-                        <div className="flex items-center gap-3 justify-center md:justify-start">
-                            <div className="flex items-center justify-center shadow-lg">
-                                <h1 className="text-[#ff671f] font-bold text-xl md:text-3xl font-playfair">AMRUT</h1>
-                            </div>
-                            <div className='text-center md:text-left'>
-                                <h2 className="text-sm md:text-lg font-bold text-orange-600" style={{ fontFamily: 'baloo, sans-serif' }}>
-                                    महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत)
-                                </h2>
-                                <p className="text-[10px] md:text-xs text-black font-playfair">ACADEMY OF MAHARASHTRA RESEARCH, UPLIFTMENT AND TRAINING (AMRUT)</p>
-                            </div>
-                        </div>
+  <div className="max-w-7xl mx-auto px-4 py-3">
+    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      {/* Left: Logo + Title */}
+      <div className="flex items-center gap-3 justify-center md:justify-start flex-shrink-0">
+        <h1 className="text-[#ff671f] font-bold text-xl md:text-3xl font-playfair">
+          AMRUT
+        </h1>
+        <div className="text-center md:text-left leading-tight">
+          <h2
+            className="text-sm md:text-lg font-bold text-orange-600"
+            style={{ fontFamily: "baloo, sans-serif" }}
+          >
+            महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत)
+          </h2>
+          <p className="text-[10px] md:text-xs text-black font-playfair">
+            ACADEMY OF MAHARASHTRA RESEARCH, UPLIFTMENT AND TRAINING (AMRUT)
+          </p>
+        </div>
+      </div>
 
-                        {/* Team Members Section */}
-                        <div className="flex items-center gap-2 md:gap-6 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
-                            {teamMembers.map((member, index) => (
-                                <div
-                                    key={index}
-                                    className="flex flex-col items-center gap-1 md:gap-2 min-w-[70px] md:min-w-[80px] group cursor-pointer"
-                                >
-                                    {/* Circle Image */}
-                                    <div className="relative">
-                                        <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 overflow-hidden">
-                                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                                        </div>
-                                        {/* Online indicator */}
-                                        <div className="absolute bottom-0 right-0 w-2 h-2 md:w-4 md:h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                                    </div>
-
-                                    {/* Name and Title */}
-                                    <div className="text-center">
-                                        <p className="text-[10px] md:text-sm font-semibold text-[#ff671f] whitespace-nowrap" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                            {member.name}
-                                        </p>
-                                        <p className="text-[8px] md:text-xs text-[600] text-black font-medium">
-                                            {member.title}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+      {/* Right: Team Members */}
+      <div className="flex items-center justify-center gap-3 md:gap-6 flex-wrap md:flex-nowrap">
+        {teamMembers.map((member, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-start w-[85px] sm:w-[95px] md:w-[110px] lg:w-[120px] min-h-[130px] md:min-h-[150px] group cursor-pointer"
+          >
+            {/* Circle Image */}
+            <div className="relative flex-shrink-0">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 overflow-hidden">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
+
+            {/* Text */}
+            <div className="text-center mt-1 w-full">
+              <p
+                className="text-[9px] md:text-[11px] font-semibold text-[#ff671f] leading-tight"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                {member.name}
+              </p>
+              <p
+                className="text-[7px] md:text-[9px] text-gray-700 font-medium leading-snug"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                {member.title}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
 
             {/* Main Navigation - Made static */}
             <nav 
