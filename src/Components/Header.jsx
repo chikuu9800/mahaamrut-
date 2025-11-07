@@ -7,11 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Team members data
 const teamMembers = [
-    { name: 'राजेश कुमार', title: 'अध्यक्ष', image: '/images/HeaderSlider/1.png' },
-    { name: 'संजय पाटील', title: 'उपाध्यक्ष', image: '/images/HeaderSlider/2.png' },
-    { name: 'अमित शर्मा', title: 'सचिव', image: '/images/HeaderSlider/3.png' },
-    { name: 'प्रकाश जोशी', title: 'कोषाध्यक्ष', image: '/images/HeaderSlider/4.png' },
-    { name: 'विजय राठोड', title: 'सदस्य', image: '/images/HeaderSlider/5.png' }
+    { name: 'श्री आचार्य देवव्रत', title: 'मा. राज्यपाल, महाराष्ट्र राज्य', image: '/images/HeaderSlider/1.png' },
+    { name: 'श्री. देवेंद्र फडणवीस', title: 'मा. मुख्यमंत्री, महाराष्ट्र राज्य', image: '/images/HeaderSlider/2.png' },
+    { name: 'श्री. एकनाथ शिंदे', title: 'मा. उपमुख्यमंत्री, महाराष्ट्र राज्य', image: '/images/HeaderSlider/3.png' },
+    { name: 'श्री. अजित पवार', title: 'मा. उपमुख्यमंत्री, महाराष्ट्र राज्य', image: '/images/HeaderSlider/4.png' },
+    { name: 'श्री.अतुल सावे', title: 'मा. मंत्री , इतर मागास बहुजन कल्याण, महाराष्ट्र राज्य', image: '/images/HeaderSlider/5.png' }
 ];
 
 const schemes = [
