@@ -13,7 +13,7 @@ import AmritMahotsavSection from '../Components/AmritMahotsavSection'
 
 const Home = () => {
   return (
-    <div className='overflow-hidden' >
+    <div>
       <EmbassyBanner />
       <SLogon />
       <YojanaSlider />
