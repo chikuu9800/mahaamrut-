@@ -43,3 +43,27 @@
     }
   }
   
+  /* === Custom Scrollbar for the whole website === */
+::-webkit-scrollbar {
+  width: 8px;               /* scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: #fff7ed;      /* light orange background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff8c1a, #ff671f);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff671f, #ff4500);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff671f #fff7ed;
+}
