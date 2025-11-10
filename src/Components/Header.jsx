@@ -439,7 +439,7 @@ export default function Header() {
 
             {/* Main Navigation - Made static */}
             <nav
-                className="bg-white z-40 border-b border-orange-100 font-700 text-sm"
+                className="bg-white z-40 border-b border-orange-100 font-700 text-sm mx-10"
                 style={{ fontFamily: 'poppins, serif' }}
             >
                 <div className="bg-white">
