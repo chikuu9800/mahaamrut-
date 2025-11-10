@@ -62,7 +62,7 @@ const cardVariants = {
 
 export default function YojanaSection() {
   return (
-    <section className="w-full bg-white py-16 px-4 md:px-10">
+    <section className="w-full bg-white py-16 px-4 md:px-10 bg-gradient-to-b from-orange-100 via-orange-50 to-white bg-[length:100%_200%]">
       {/* Section Title */}
       <div className="text-center mb-12">
         <h2

@@ -38,10 +38,10 @@ export default function AmrutStats() {
       initial={{ backgroundPosition: "0% 0%" }}
       animate={{ backgroundPosition: ["0% 0%", "0% 100%", "0% 0%"] }}
       transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      className="relative py-16 bg-gradient-to-b from-orange-100 via-white to-orange-100 bg-[length:100%_200%] text-center overflow-hidden"
+      className="relative py-16 bg-gradient-to-b from-orange-50 via-white to-orange-100 ] text-center overflow-hidden"
     >
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-t from-orange-200/20 via-transparent to-transparent pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-50 via-orange-100 to-white bg-[length:100%_200%]  pointer-events-none"></div>
 
       <motion.h2
         className="text-3xl md:text-4xl font-bold text-orange-800 mb-10 relative z-10"
@@ -58,7 +58,7 @@ export default function AmrutStats() {
         {stats.map((stat, index) => (
           <motion.div
             key={stat.id}
-            className="bg-gradient-to-b from-orange-100 via-white to-orange-50 rounded-2xl shadow-md p-6 flex flex-col items-center justify-center border border-orange-200 transition-all duration-300 ease-out hover:shadow-lg"
+            className=" rounded-2xl shadow-md p-6 flex flex-col items-center justify-center border border-orange-200 transition-all duration-300 ease-out hover:shadow-lg"
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.2 }}

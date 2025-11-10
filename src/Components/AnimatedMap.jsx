@@ -109,10 +109,10 @@ const AnimatedMapCircle = () => {
   const outerIcons = icons.slice(8);
 
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-4 sm:px-8 md:px-20 py-12 sm:py-16 bg-gradient-to-b from-orange-50 via-white to-orange-100 overflow-hidden">
+    <section className="relative w-full min-h-[90vh] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-4 sm:px-8 md:px-20 py-12 sm:py-16 bg-gradient-to-b from-orange-100 via-orange-50 to-white bg-[length:100%_200%] overflow-hidden">
 
     {/* === Left Section: Text (top on mobile) === */}
-    <div className="flex-1 text-center  md:text-left max-w-xl space-y-4 mt-8 md:mt-0">
+    <div className="flex-1 text-center md:mt-10 md:text-left max-w-xl space-y-4 mt-8 md:mt-0">
       <h2
         className="text-2xl sm:text-3xl md:text-5xl font-bold text-orange-700 leading-tight"
         style={{ fontFamily: "baloo, sans-serif" }}

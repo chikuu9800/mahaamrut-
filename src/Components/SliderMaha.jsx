@@ -35,7 +35,7 @@ const MaharashtraShowcase = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-orange-100 via-white to-orange-100">
+    <div className="bg-gradient-to-b from-orange-100 via-orange-50 to-white bg-[length:100%_200%]">
       <section className="relative w-full flex flex-col justify-center items-center py-12 md:py-16 overflow-hidden min-h-[80vh]">
         {/* === Section Header === */}
         <motion.h1

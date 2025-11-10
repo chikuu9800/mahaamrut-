@@ -32,7 +32,7 @@ export default function AmrutMissionVision() {
       initial={{ backgroundPosition: "0% 0%" }}
       animate={{ backgroundPosition: ["0% 0%", "0% 100%", "0% 0%"] }}
       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className="relative py-16 text-center bg-gradient-to-b from-orange-100 via-orange-100 to-white bg-[length:100%_200%] overflow-hidden"
+      className="relative py-16 text-center bg-gradient-to-b from-orange-50 via-orange-100 to-white bg-[length:100%_200%] overflow-hidden"
     >
       {/* === Title === */}
       <motion.h2
