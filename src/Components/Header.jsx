@@ -11,7 +11,7 @@ const teamMembers = [
     { name: 'श्री. देवेंद्र फडणवीस', title: 'मा. मुख्यमंत्री, महाराष्ट्र राज्य', image: '/images/HeaderSlider/2.png' },
     { name: 'श्री. एकनाथ शिंदे', title: 'मा. उपमुख्यमंत्री, महाराष्ट्र राज्य', image: '/images/HeaderSlider/3.png' },
     { name: 'श्री. अजित पवार', title: 'मा. उपमुख्यमंत्री, महाराष्ट्र राज्य', image: '/images/HeaderSlider/4.png' },
-    { name: 'श्री.अतुल सावे', title: 'मा. मंत्री , इतर मागास बहुजन कल्याण, महाराष्ट्र राज्य', image: '/images/HeaderSlider/5.png' }
+    { name: 'श्री.अतुल सावे', title: 'मा. मंत्री  बहुजन कल्याण, महाराष्ट्र राज्य', image: '/images/HeaderSlider/5.png' }
 ];
 
 const schemes = [
@@ -372,38 +372,39 @@ export default function Header() {
     return (
         <div className="bg-white">
             {/* Sub Header - Made static */}
-            <div className="bg-white z-50">
-                <div className="max-w-7xl mx-auto px-4 py-3">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            {/* Sub Header - One-line Responsive Left/Right Layout */}
+            <div className="bg-white z-50 w-full">
+                <div className="max-w-7xl mx-auto px-2 sm:px-4 py-3">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
 
-                        {/* Left: Logo + Title */}
-                        <div className="flex items-center gap-3 justify-center md:justify-start flex-shrink-0">
-                            <h1 className="text-[#ff671f] font-bold text-xl md:text-3xl font-playfair">
+                        {/* === Left Section === */}
+                        <div className="flex items-center gap-4  md:justify-start flex-shrink-0 text-left md:text-left">
+                            <h1 className="text-[#ff671f] font-bold text-lg sm:text-xl md:text-3xl font-playfair">
                                 AMRUT
                             </h1>
-                            <div className="text-center md:text-left leading-tight">
+                            <div className="leading-tight">
                                 <h2
-                                    className="text-sm md:text-lg font-bold text-orange-600"
+                                    className="text-[10px] sm:text-sm md:text-lg font-bold text-orange-600"
                                     style={{ fontFamily: "baloo, sans-serif" }}
                                 >
                                     महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत)
                                 </h2>
-                                <p className="text-[10px] md:text-xs text-black font-playfair">
+                                <p className="text-[8px] sm:text-[10px] md:text-xs text-black font-playfair">
                                     ACADEMY OF MAHARASHTRA RESEARCH, UPLIFTMENT AND TRAINING (AMRUT)
                                 </p>
                             </div>
                         </div>
 
-                        {/* Right: Team Members */}
-                        <div className="flex items-center justify-center gap-3 md:gap-6 flex-wrap md:flex-nowrap">
+                        {/* === Right Section (Team Members) === */}
+                        <div className="flex items-center justify-start md:justify-end gap-2 sm:gap-3 md:gap-4 overflow-x-auto scrollbar-hide w-full md:w-auto px-1 sm:px-0">
                             {teamMembers.map((member, index) => (
                                 <div
                                     key={index}
-                                    className="flex flex-col items-center justify-start w-[85px] sm:w-[95px] md:w-[110px] lg:w-[120px] min-h-[130px] md:min-h-[150px] group cursor-pointer"
+                                    className="flex flex-col items-center justify-start w-[55px] sm:w-[75px] md:w-[100px] flex-shrink-0 cursor-pointer group"
                                 >
                                     {/* Circle Image */}
-                                    <div className="relative flex-shrink-0">
-                                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 overflow-hidden">
+                                    <div className="relative">
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md overflow-hidden group-hover:scale-105 transition-transform duration-300">
                                             <img
                                                 src={member.image}
                                                 alt={member.name}
@@ -415,13 +416,13 @@ export default function Header() {
                                     {/* Text */}
                                     <div className="text-center mt-1 w-full">
                                         <p
-                                            className="text-[9px] md:text-[11px] font-semibold text-[#ff671f] leading-tight"
+                                            className="text-[7px] sm:text-[9px] md:text-[11px] font-semibold text-[#ff671f] leading-tight"
                                             style={{ fontFamily: "Poppins, sans-serif" }}
                                         >
                                             {member.name}
                                         </p>
                                         <p
-                                            className="text-[7px] md:text-[9px] text-gray-700 font-medium leading-snug"
+                                            className="text-[6px] sm:text-[8px] md:text-[9px] text-gray-700 font-medium leading-snug"
                                             style={{ fontFamily: "Poppins, sans-serif" }}
                                         >
                                             {member.title}
@@ -433,6 +434,7 @@ export default function Header() {
                     </div>
                 </div>
             </div>
+
 
 
             {/* Main Navigation - Made static */}

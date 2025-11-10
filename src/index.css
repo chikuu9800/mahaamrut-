@@ -103,3 +103,9 @@ For Firefox
   background-color: #ff671f;
   border-radius: 6px;
 } */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
