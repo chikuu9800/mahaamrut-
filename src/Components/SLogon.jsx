@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function SLogon() {
   return (
     <section
-      className="relative w-full min-h-[60vh] py-10 px-4 flex items-center justify-center overflow-hidden bg-gradient-to-b from-orange-100 via-orange-50 to-white bg-[length:100%_200%] "
+      className="relative w-full min-h-[60vh] py-10 px-4 flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-orange-100 "
     >
       {/* === Background Skyline Image (Smaller + Faded) === */}
       <div

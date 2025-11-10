@@ -28,7 +28,7 @@ export default function AmrutMissionVision() {
   ];
 
   return (
-    <section className="relative min-h-screen py-20 text-center bg-gradient-to-b from-orange-50 via-orange-100 to-orange bg-[length:100%_200%] overflow-hidden">
+    <section className="relative min-h-screen py-20 text-center bg-gradient-to-b from-orange-100 to-white overflow-hidden">
       {/* === Title === */}
       <motion.h2
         className="text-4xl md:text-5xl font-bold text-orange-800 mb-6"

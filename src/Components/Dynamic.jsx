@@ -38,10 +38,10 @@ export default function AmrutStats() {
       initial={{ backgroundPosition: "0% 0%" }}
       animate={{ backgroundPosition: ["0% 0%", "0% 100%", "0% 0%"] }}
       transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      className="relative py-16 bg-gradient-to-b from-orange-50 via-white to-orange-100 ] text-center overflow-hidden"
+      className="relative py-16bg-gradient-to-b from-orange-100 to-white text-center overflow-hidden py-10"
     >
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-orange-50 via-orange-100 to-white bg-[length:100%_200%]  pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-100 to-white  pointer-events-none"></div>
 
       <motion.h2
         className="text-3xl md:text-4xl font-bold text-orange-800 mb-10 relative z-10"

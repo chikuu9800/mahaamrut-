@@ -120,7 +120,7 @@ export default function AmrutBanner() {
 
       {/* RIGHT SIDE - IMAGE PANEL */}
       <motion.div
-        className="relative w-full md:w-1/2 bg-gradient-to-bl from-orange-100 via-orange-100 to-orange-100 flex justify-center items-center py-12 overflow-hidden"
+        className="relative w-full md:w-1/2 bg-gradient-to-bl from-orange-50 via-orange-100 to-orange-200 flex justify-center items-center py-12 overflow-hidden"
         initial={{ opacity: 0, x: 60 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}

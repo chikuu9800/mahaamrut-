@@ -49,7 +49,7 @@ export default function AmrutSli() {
   }, []);
 
   return (
-    <section className="relative w-full py-16 bg-gradient-to-b from-orange-50 via-white to-orange-100 overflow-hidden">
+    <section className="relative w-full py-16 bg-gradient-to-b from-orange-100 to-white overflow-hidden">
       <div className="relative w-[85%] mx-auto rounded-3xl shadow-2xl bg-gradient-to-b from-orange-50 via-orange-100 to-white bg-[length:100%_200%] overflow-hidden backdrop-blur-sm">
         <div className="absolute inset-0 bg-gradient-to-t from-orange-300/30 via-transparent to-transparent pointer-events-none"></div>
 
