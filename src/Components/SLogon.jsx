@@ -50,7 +50,7 @@ export default function SLogon() {
           className="flex-1 text-center md:text-left md:ml-[40%]"
           style={{ fontFamily: "baloo, sans-serif" }}
         >
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 leading-snug">
+          <h1 className="text-2xl md:text-3xl font-bold font-bold text-orange-700 leading-snug">
             महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत)
           </h1>
           <p className="text-gray-700 mt-4 text-lg">

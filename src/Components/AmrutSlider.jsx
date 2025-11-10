@@ -49,119 +49,115 @@ export default function AmrutSli() {
   }, []);
 
   return (
-    <section
-      className="relative w-[85%] mx-auto mt-[50px] mb-10 overflow-hidden rounded-3xl shadow-2xl"
-      style={{
-        background:
-          "linear-gradient(120deg, #ffb26b 0%, #fff3e0 50%, #ffb26b 100%)",
-      }}
-    >
-      {/* Subtle Animated Overlay for Dynamic Feel */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-tr from-orange-300/25 via-orange-100/10 to-orange-50/10"
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        style={{ backgroundSize: "200% 200%" }}
-      ></motion.div>
+    <section className="relative w-full py-16 bg-gradient-to-b from-orange-100 via-white to-orange-100 overflow-hidden">
+      <div className="relative w-[85%] mx-auto rounded-3xl shadow-2xl bg-gradient-to-b from-orange-200 via-orange-100 to-orange-50 overflow-hidden backdrop-blur-sm">
+        <div className="absolute inset-0 bg-gradient-to-t from-orange-300/30 via-transparent to-transparent pointer-events-none"></div>
 
-      {/* Bottom Shadow Glow */}
-      <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-orange-300/40 via-transparent to-transparent z-0"></div>
+        <div className="relative z-10 flex flex-col lg:flex-row items-stretch justify-between">
+          {/* === LEFT SIDE === */}
+          <div className="relative flex flex-col justify-between w-full lg:w-1/2 min-h-[50vh] text-center lg:text-left">
+            {/* Title + Description */}
+            <div className="pt-16 pb-6 px-6 md:px-10">
+              <h2
+                className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-900 leading-snug mb-3"
+                style={{ fontFamily: "Baloo, serif" }}
+              >
+                {currentContent.title}
+              </h2>
+              <p
+                className="text-gray-800 text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                {currentContent.desc}
+              </p>
+            </div>
 
-      {/* Content Wrapper */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-stretch justify-between">
-        {/* LEFT SIDE */}
-        <div className="relative flex flex-col justify-between w-full lg:w-1/2 min-h-[70vh] md:min-h-[75vh] text-center lg:text-left">
-          {/* Title + Description */}
-          <div className="pt-16 px-6 md:px-10 lg:px-14">
-            <h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-900 leading-snug mb-3"
-              style={{ fontFamily: "Baloo, serif" }}
-            >
-              {currentContent.title}
-            </h2>
-            <p
-              className="text-gray-800 text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              {currentContent.desc}
-            </p>
+            {/* Shaniwarwada Fort (Bottom Illustration) */}
+            <div className="relative flex justify-center items-end mt-auto">
+              <motion.div
+                className="absolute bottom-0 left-0 w-full h-[50%] bg-gradient-to-t from-orange-300/70 via-transparent to-transparent"
+                animate={{ opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 6, repeat: Infinity }}
+              ></motion.div>
+              <img
+                src="/images/wmremove-transformed (1) (1).png"
+                alt="Shaniwarwada Fort"
+                className="relative z-10 w-[85%] md:w-[75%] lg:w-[80%] object-contain mix-blend-multiply opacity-95 drop-shadow-[0_25px_60px_rgba(255,140,0,0.35)]"
+              />
+            </div>
           </div>
 
-          {/* Shaniwarwada Fort (Bottom Fixed) */}
-          <div className="relative flex justify-center items-end mt-auto">
-            <motion.div
-              className="absolute bottom-0 left-0 w-full h-[50%] bg-gradient-to-t from-orange-200/70 via-transparent to-transparent"
-              animate={{ opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            ></motion.div>
-            <img
-              src="/images/wmremove-transformed (1) (1).png"
-              alt="Shaniwarwada Fort"
-              className="relative z-10 w-[85%] md:w-[75%] lg:w-[80%] object-contain mix-blend-multiply opacity-95 drop-shadow-[0_25px_60px_rgba(255,140,0,0.35)]"
-            />
-          </div>
+          {/* === RIGHT SIDE === */}
+          {/* === RIGHT SIDE === */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="relative w-full lg:w-1/2 flex flex-col justify-center items-center py-10"
+          >
+            <div className="relative w-[85%] max-w-lg">
+              {/* Main Slide */}
+              <div className="overflow-hidden rounded-2xl shadow-lg border border-orange-300 
+      bg-gradient-to-b from-orange-200/60 via-orange-100/70 to-orange-50/60 
+      backdrop-blur-md transition-all duration-700">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={index}
+                    src={slides[index]}
+                    alt={`Slide ${index + 1}`}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="w-full h-56 md:h-72 lg:h-80 object-cover rounded-2xl"
+                  />
+                </AnimatePresence>
+              </div>
+
+              {/* Thumbnails + Controls on Sides */}
+              <div className="relative mt-4 flex items-center justify-center">
+                {/* Prev Button (Left of Thumbnails) */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-[-35px] md:left-[-45px] p-2 rounded-full bg-gradient-to-br 
+        from-orange-100 to-orange-200 shadow-md hover:from-orange-200 hover:to-orange-300 
+        transition z-10"
+                >
+                  <ChevronLeft className="text-orange-700 w-5 h-5" />
+                </button>
+
+                {/* Thumbnails */}
+                <div className="flex justify-center gap-3 overflow-x-auto pb-2">
+                  {slides.slice(0, 4).map((thumb, i) => (
+                    <motion.img
+                      key={i}
+                      src={thumb}
+                      alt={`Thumbnail ${i + 1}`}
+                      onClick={() => setIndex(i)}
+                      whileHover={{ scale: 1.05 }}
+                      className={`w-16 h-12 md:w-20 md:h-14 rounded-lg object-cover cursor-pointer transition-all ${i === index
+                          ? "ring-2 ring-orange-500 shadow-md"
+                          : "opacity-70 hover:opacity-100"
+                        }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Next Button (Right of Thumbnails) */}
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-[-35px] md:right-[-45px] p-2 rounded-full bg-gradient-to-br 
+        from-orange-100 to-orange-200 shadow-md hover:from-orange-200 hover:to-orange-300 
+        transition z-10"
+                >
+                  <ChevronRight className="text-orange-700 w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
-
-        {/* RIGHT SIDE — Unified Gradient with Parent */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="relative w-full lg:w-1/2 flex flex-col justify-center items-center py-10"
-        >
-          <div className="relative w-[85%] max-w-lg">
-            {/* Main Slide */}
-            <div className="overflow-hidden rounded-2xl shadow-lg border border-orange-300 bg-white/60 backdrop-blur-sm">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={index}
-                  src={slides[index]}
-                  alt={`Slide ${index + 1}`}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className="w-full h-56 md:h-72 lg:h-80 object-cover rounded-2xl"
-                />
-              </AnimatePresence>
-            </div>
-
-            {/* Thumbnails */}
-            <div className="flex justify-center gap-3 mt-4 overflow-x-auto pb-2">
-              {slides.slice(0, 4).map((thumb, i) => (
-                <motion.img
-                  key={i}
-                  src={thumb}
-                  alt={`Thumbnail ${i + 1}`}
-                  onClick={() => setIndex(i)}
-                  whileHover={{ scale: 1.05 }}
-                  className={`w-16 h-12 md:w-20 md:h-14 rounded-lg object-cover cursor-pointer transition-all ${
-                    i === index
-                      ? "ring-2 ring-orange-500 shadow-md"
-                      : "opacity-70 hover:opacity-100"
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Controls */}
-            <div className="flex justify-center gap-4 mt-4">
-              <button
-                onClick={prevSlide}
-                className="p-2 rounded-full bg-white shadow-md hover:bg-orange-100 transition"
-              >
-                <ChevronLeft className="text-orange-700 w-5 h-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="p-2 rounded-full bg-white shadow-md hover:bg-orange-100 transition"
-              >
-                <ChevronRight className="text-orange-700 w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

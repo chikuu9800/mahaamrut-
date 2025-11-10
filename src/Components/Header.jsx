@@ -130,12 +130,12 @@ export default function Header() {
     };
 
     const renderMobileMenu = () => (
-        <div className="lg:hidden">
-            <div className="flex items-center justify-between px-4 py-3 w-full ">
-                <span className="text-[#ff671f] text-base">मेनू</span>
+        <div className="lg:hidden ">
+            <div className="flex items-center justify-between px-4 py-3 w-[100%] ">
+                <span className="text-[#ff671f] text-base align-left">मेनू</span>
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="text-[#ff671f] p-2 hover:bg-white/10 rounded-md transition-colors"
+                    className="text-[#ff671f] p-2 hover:bg-white/10 rounded-md transition-colors align-right"
                     aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 >
                     {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -149,7 +149,7 @@ export default function Header() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="bg-white border-t border-orange-200"
+                        className="bg-white border-t border-orange-200 w-full mb-4"
                     >
                         <div className="divide-y divide-orange-200">
                             {menuStructure.map((menu, idx) => (
@@ -439,13 +439,13 @@ export default function Header() {
 
             {/* Main Navigation - Made static */}
             <nav
-                className="bg-white z-40 border-b border-orange-100 font-700 text-sm mx-10"
+                className="bg-white z-40 border-b border-orange-100 font-700 text-sm  "
                 style={{ fontFamily: 'poppins, serif' }}
             >
                 <div className="bg-white">
                     <div className="max-w-12xl text-sm mx-auto flex justify-between items-center">
                         {/* Desktop Menu */}
-                        <ul className="hidden lg:flex flex-wrap">
+                        <ul className="hidden lg:flex flex-wrap mx-10">
                             {menuStructure.map((menu, idx) => (
                                 <li
                                     key={idx}
@@ -596,9 +596,10 @@ export default function Header() {
                         </ul>
 
                         {/* Mobile Menu */}
-                        {renderMobileMenu()}
+                        
                     </div>
                 </div>
+                {renderMobileMenu()}
             </nav>
         </div>
     );

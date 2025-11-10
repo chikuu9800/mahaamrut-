@@ -32,12 +32,19 @@ export default function AmrutStats() {
   ];
 
   return (
-    <section
+    // === Outer Background (same as AnimatedMapCircle) ===
+    <motion.section
       ref={ref}
-      className="py-16 bg-gradient-to-r from-orange-50 via-orange-100 to-orange-50 text-center"
+      initial={{ backgroundPosition: "0% 0%" }}
+      animate={{ backgroundPosition: ["0% 0%", "0% 100%", "0% 0%"] }}
+      transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      className="relative py-16 bg-gradient-to-b from-orange-100 via-white to-orange-100 bg-[length:100%_200%] text-center overflow-hidden"
     >
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-orange-200/20 via-transparent to-transparent pointer-events-none"></div>
+
       <motion.h2
-        className="text-3xl md:text-4xl font-bold text-orange-800 mb-10"
+        className="text-3xl md:text-4xl font-bold text-orange-800 mb-10 relative z-10"
         style={{ fontFamily: "Baloo, serif" }}
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -46,29 +53,33 @@ export default function AmrutStats() {
         अमृतचा प्रभाव
       </motion.h2>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 px-6">
+      {/* === Stats Cards === */}
+      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 px-6">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.id}
-            className="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center justify-center border border-orange-100 transition-all duration-300 ease-out"
+            className="bg-gradient-to-b from-orange-100 via-white to-orange-50 rounded-2xl shadow-md p-6 flex flex-col items-center justify-center border border-orange-200 transition-all duration-300 ease-out hover:shadow-lg"
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.2 }}
             whileHover={{
               y: -8,
-              backgroundColor: "rgba(255, 243, 230, 1)", // faint warm tone
-              boxShadow: "0 10px 25px rgba(255, 140, 0, 0.15)",
+              backgroundColor: "rgba(255, 235, 210, 1)",
+              boxShadow: "0 10px 25px rgba(255, 140, 0, 0.25)",
             }}
           >
             <div className="mb-3">{stat.icon}</div>
             <Counter target={stat.value} suffix={stat.suffix} start={isInView} />
-            <p className="text-lg font-medium text-orange-800 mt-2">
+            <p
+              className="text-lg font-medium text-orange-800 mt-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               {stat.title}
             </p>
           </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -99,7 +110,7 @@ function Counter({ target, suffix, start }) {
 
   return (
     <motion.h3
-      className="text-4xl md:text-5xl font-bold text-orange-700"
+      className="text-4xl md:text-5xl font-bold text-orange-700 drop-shadow-sm"
       style={{ fontFamily: "Baloo, serif" }}
     >
       {count.toLocaleString("mr-IN")}
