@@ -160,7 +160,7 @@ export default function Header() {
                                                 to={menu.link}
                                                 className="flex-1 px-4 py-3 text-orange-600 hover:bg-orange-50 transition-colors"
                                                 onClick={() => !menu.submenus && setMobileMenuOpen(false)}
-                                                style={{ fontFamily: 'poppins, serif' }}
+                                                style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
                                             >
                                                 {menu.name}
                                             </Link>
@@ -170,7 +170,7 @@ export default function Header() {
                                                 className="flex-1 px-4 py-3 text-orange-600 hover:bg-orange-50 transition-colors"
                                                 target={menu.link?.startsWith('http') ? "_blank" : undefined}
                                                 rel={menu.link?.startsWith('http') ? "noopener noreferrer" : undefined}
-                                                style={{ fontFamily: 'poppins, serif' }}
+                                                style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
                                             >
                                                 {menu.name}
                                             </a>
@@ -199,7 +199,7 @@ export default function Header() {
                                                 exit={{ opacity: 0, height: 0 }}
                                                 transition={{ duration: 0.2 }}
                                                 className="bg-orange-50"
-                                                style={{ fontFamily: 'poppins, serif' }}
+                                                style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
                                             >
                                                 {menu.submenus.map((submenu, subIdx) => {
                                                     const isNested = isSubMenuItem(submenu);
@@ -214,7 +214,7 @@ export default function Header() {
                                                                         to={link}
                                                                         className="flex-1 px-6 py-3 text-orange-600 hover:bg-orange-100 transition-colors text-sm"
                                                                         onClick={() => setMobileMenuOpen(false)}
-                                                                        style={{ fontFamily: 'poppins, serif' }}
+                                                                        style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
                                                                     >
                                                                         {displayText}
                                                                     </Link>
@@ -446,7 +446,7 @@ export default function Header() {
             {/* Main Navigation - Made static */}
             <nav
                 className="bg-white z-40 border-b border-orange-100 font-700 text-sm  "
-                style={{ fontFamily: 'poppins, serif' }}
+                style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
             >
                 <div className="bg-white">
                     <div className="max-w-12xl text-sm mx-auto flex justify-between items-center">
@@ -461,12 +461,13 @@ export default function Header() {
                                         setOpenMenu(null);
                                         setActiveSubmenu({ submenuIndex: null, nestedIndex: null });
                                     }}
+                                    style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
                                 >
                                     {/* === MAIN MENU BUTTON === */}
                                     {menu.submenus ? (
                                         <button
                                             className="flex items-center justify-between gap-1 px-4 py-3 bg-white text-base text-[#ff671f] hover:bg-orange-50 transition-all w-full text-left"
-                                            style={{ fontFamily: "poppins, serif" }}
+                                            style={{ fontFamily: "baloo, serif" }}
                                         >
                                             {menu.name}
                                             <motion.span
@@ -481,7 +482,7 @@ export default function Header() {
                                         <Link
                                             to={menu.link}
                                             className="flex items-center gap-1 px-4 py-3 bg-white text-base text-[#ff671f] hover:bg-orange-50 transition-all text-left"
-                                            style={{ fontFamily: "poppins, serif" }}
+                                            style={{ fontFamily: "baloo, serif" }}
                                         >
                                             {menu.name}
                                         </Link>
@@ -502,7 +503,7 @@ export default function Header() {
                                                     style={{
                                                         scrollbarWidth: "thin",
                                                         scrollbarColor: "#ff671f transparent",
-                                                        fontFamily: "poppins, serif",
+                                                        fontFamily: "baloo, serif",
                                                     }}
                                                 >
                                                     {menu.submenus.map((submenu, subIdx) => {
