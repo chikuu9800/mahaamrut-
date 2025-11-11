@@ -109,22 +109,22 @@ const AnimatedMapCircle = () => {
   const outerIcons = icons.slice(8);
 
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-4 sm:px-8 md:px-20 py-12 sm:py-16  bg-gradient-to-b from-white to-orange-100  overflow-hidden">
+    <section className="relative w-[80%] m-auto min-h-[50vh] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-4 sm:px-8 md:px-20 py-12 sm:py-0 overflow-hidden">
 
     {/* === Left Section: Text (top on mobile) === */}
-    <div className="flex-1 text-center md:mt-10 md:text-left max-w-xl space-y-4 mt-8 md:mt-0">
+    <div className="flex-1 text-center md:text-left max-w-xl space-y-4 mt-8 md:mt-0">
       <h2
         className="text-2xl sm:text-3xl md:text-5xl font-bold text-orange-700 leading-tight"
         style={{ fontFamily: "baloo, sans-serif" }}
       >
         महाराष्ट्र संशोधन, उन्नती आणि प्रशिक्षण प्रबोधनी
       </h2>
-      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed font-medium">
+      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed font-medium" style={{fontFamily: 'poppins, sans-serif'}}>
         राज्यातील युवक, युवती आणि इतर उमेदवारांच्या सर्वांगीण विकासासाठी विविध
         उद्योग, रोजगार, ऊर्जा, शिक्षण व प्रशिक्षण क्षेत्रात प्रोत्साहन देणारी
         संस्था — “अमृत प्रबोधनी”.
       </p>
-      <p className="text-gray-600 text-xs sm:text-sm md:text-base">
+      <p className="text-gray-600 text-xs sm:text-sm md:text-lg" style={{fontFamily: 'poppins, sans-serif'}}>
         महाराष्ट्राच्या सर्वांगीण विकासासाठी नवोन्मेष, प्रशिक्षण आणि संशोधनाचे
         एकत्रिकरण.
       </p>
@@ -143,8 +143,8 @@ const AnimatedMapCircle = () => {
     >
       {/* Outer Circle */}
       <div className="outer-ring absolute 
-        w-[260px] sm:w-[320px] md:w-[460px] 
-        h-[260px] sm:h-[320px] md:h-[460px] 
+        w-[260px] sm:w-[320px] md:w-[400px] 
+        h-[260px] sm:h-[320px] md:h-[400px] 
         border border-orange-300 rounded-full flex items-center justify-center">
         {outerIcons.map((Icon, index) => {
           const angle = (index / outerIcons.length) * 2 * Math.PI;
@@ -165,8 +165,8 @@ const AnimatedMapCircle = () => {
   
       {/* Inner Circle */}
       <div className="inner-ring absolute 
-        w-[180px] sm:w-[220px] md:w-[320px] 
-        h-[180px] sm:h-[220px] md:h-[320px] 
+        w-[180px] sm:w-[220px] md:w-[280px] 
+        h-[180px] sm:h-[220px] md:h-[280px] 
         border border-orange-200 rounded-full flex items-center justify-center">
         {innerIcons.map((Icon, index) => {
           const angle = (index / innerIcons.length) * 2 * Math.PI;

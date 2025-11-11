@@ -62,7 +62,7 @@ const cardVariants = {
 
 export default function YojanaSection() {
   return (
-    <section className="w-full bg-white py-16 px-4 md:px-10  bg-gradient-to-b from-white to-orange-100 ">
+    <section className="w-[80%] m-auto bg-white py-16 px-4 md:px-10">
       {/* Section Title */}
       <div className="text-center mb-12">
         <h2
@@ -71,7 +71,7 @@ export default function YojanaSection() {
         >
           अमृत योजना विभाग
         </h2>
-        <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+        <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto" style={{fontFamily: 'poppins, sans-serif'}}>
           अमृत संस्थेद्वारे राबवल्या जाणाऱ्या विविध प्रशिक्षण व विकास योजनांची माहिती.
         </p>
       </div>
@@ -100,17 +100,17 @@ export default function YojanaSection() {
               {yojana.title}
             </h3>
 
-            <p className="text-gray-700 text-sm md:text-base mb-3 leading-relaxed">
+            <p className="text-gray-700 text-sm md:text-base mb-3 leading-relaxed" style={{fontFamily: 'poppins, sans-serif'}}>
               {yojana.details}
             </p>
 
-            <p className="text-gray-800 font-medium mb-2">
-              <span className="text-orange-700 font-semibold">फायदे: </span>
+            <p className="text-gray-800 font-medium mb-2" style={{fontFamily: 'poppins, sans-serif'}}>
+              <span className="text-orange-700 font-semibold" >फायदे: </span>
               {yojana.benefits}
             </p>
 
-            <p className="text-gray-700 text-sm mb-2">
-              <span className="text-orange-600 font-semibold">अंतिम दिनांक: </span>
+            <p className="text-gray-700 text-sm mb-2" style={{fontFamily: 'poppins, sans-serif'}}>
+              <span className="text-orange-600 font-semibold" >अंतिम दिनांक: </span>
               {yojana.deadline}
             </p>
 
@@ -119,6 +119,7 @@ export default function YojanaSection() {
               href="https://mahaamrut.org.in/"
               target="_blank"
               rel="noopener noreferrer"
+              style={{fontFamily: 'poppins, sans-serif'}}
               className="absolute bottom-4 right-4 px-4 py-2 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 shadow-md transition-all duration-300"
             >
               अधिक वाचा →

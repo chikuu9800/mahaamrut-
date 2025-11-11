@@ -49,7 +49,7 @@ export default function AmrutBanner() {
 
   return (
     <section
-      className="relative w-[100%] m-auto min-h-[55vh] sm:min-h-[50vh] md:min-h-[55vh] flex flex-col md:flex-row overflow-hidden  shadow-2xl"
+      className="relative w-[100%] m-auto min-h-[55vh] sm:min-h-[50vh] md:min-h-[70vh] flex flex-col md:flex-row overflow-hidden  shadow-2xl"
       style={{
         backgroundImage: `url('/images/1000_F_581566986_vjGXzCbNhpH5yvsNoN0dhZoG9mcVOnBK.jpg')`,
         backgroundSize: "cover",
@@ -59,7 +59,7 @@ export default function AmrutBanner() {
     >
       {/* LEFT GRADIENT OVERLAY */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-orange-900/90 via-orange-700/75 to-transparent"
+        className="absolute inset-0 bg-orange-700/75 to-transparent"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
         style={{ backgroundSize: "200% 200%" }}

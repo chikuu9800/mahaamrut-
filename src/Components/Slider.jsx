@@ -8,37 +8,37 @@ const aboutData = [
     title: "अमृत विषयी",
     description: `महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत) ही एक स्वायत्त संस्था आहे जी महाराष्ट्र शासनाने स्थापन केली आहे.
     राज्यातील युवकांना संशोधन, कौशल्यविकास व प्रशिक्षणाच्या माध्यमातून रोजगाराच्या संधी उपलब्ध करून देणे हा या संस्थेचा प्रमुख उद्देश आहे.`,
-    image: "/images/_-removebg-preview.png",
+    image: "/images/Red_Fort_India__India__Fort__Red_PNG_Transparent_Image_and_Clipart_for_Free_Download-removebg-preview.png",
   },
   {
     id: "establishment",
     title: "अमृतची स्थापना",
     description: `दिनांक २२ ऑगस्ट २०१९ रोजी महाराष्ट्र शासनाने शासन निर्णयाद्वारे 'अमृत' या संस्थेची स्थापना केली.
     या संस्थेचा हेतू म्हणजे संशोधन आणि प्रशिक्षणाद्वारे युवकांना सक्षम करणे व समाजातील सर्व घटकांचा विकास घडवणे.`,
-    image: "/images/_-removebg-preview.png",
+    image: "/images/Red_Fort_India__India__Fort__Red_PNG_Transparent_Image_and_Clipart_for_Free_Download-removebg-preview.png",
   },
   {
     id: "board",
     title: "संचालक मंडळ",
     description: `अमृतच्या कार्याची दिशा ठरवण्यासाठी सक्षम संचालक मंडळ कार्यरत आहे. या मंडळात राज्य शासनातील वरिष्ठ अधिकारी,
     क्षेत्रातील तज्ज्ञ व समाजहिताच्या दृष्टीने कार्य करणारे सदस्य यांचा समावेश आहे.`,
-    image: "/images/_-removebg-preview.png",
+    image: "/images/Red_Fort_India__India__Fort__Red_PNG_Transparent_Image_and_Clipart_for_Free_Download-removebg-preview.png",
   },
   {
     id: "initiatives",
     title: "उपक्रम आणि योजना",
     description: `अमृत संस्थेमार्फत विविध प्रशिक्षण, स्वयंरोजगार व उद्योजकता विकासाच्या योजना राबविण्यात येतात.
     या योजनांद्वारे युवकांना आत्मनिर्भरतेकडे वाटचाल करण्याची प्रेरणा दिली जाते.`,
-    image: "/images/_-removebg-preview.png",
+    image: "/images/Red_Fort_India__India__Fort__Red_PNG_Transparent_Image_and_Clipart_for_Free_Download-removebg-preview.png",
   },
   {
     id: "contact",
     title: "संपर्क माहिती",
     description: `अमृत मुख्य कार्यालय:  
     ५ वा मजला, हनुमान रोड, मंत्रालय, मुंबई – ४०००३२  
-    दूरध्वनी: ०२२-२२२२२२२२  
+    दूरध्वनी : ०२२-२२२२२२२२  
     ईमेल: info@mahaamrut.org.in`,
-    image: "/images/_-removebg-preview.png",
+    image: "/images/Red_Fort_India__India__Fort__Red_PNG_Transparent_Image_and_Clipart_for_Free_Download-removebg-preview.png",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function AboutAmrut() {
   const currentItem = aboutData.find((item) => item.id === selected);
 
   return (
-    <section className="relative w-full  py-16 px-4 md:px-10 bg-gradient-to-b from-orange-100 to-white">
+    <section className="relative w-[80%] m-auto  py-16 px-4 md:px-10 bg-white">
       {/* Section Header */}
       <div className="text-center mb-10">
         <h2
@@ -57,7 +57,7 @@ export default function AboutAmrut() {
         >
           अमृत विषयी माहिती
         </h2>
-        <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+        <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto" style={{fontFamily: 'poppins, sans-serif'}}>
           महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत) ही संस्था
           संशोधन, प्रशिक्षण आणि विकास उपक्रमांद्वारे युवकांना
           कौशल्यविकास, रोजगार आणि प्रगतीच्या संधी उपलब्ध करून देते.
@@ -84,6 +84,7 @@ export default function AboutAmrut() {
                     ? "border-orange-600 text-orange-700 font-semibold"
                     : "border-transparent hover:text-orange-600"
                 }`}
+                style={{ fontFamily: "Baloo, serif" }}
               >
                 {item.title}
               </li>
@@ -99,7 +100,7 @@ export default function AboutAmrut() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-2 bg-white shadow-xl rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-center border border-orange-100"
+            className="md:col-span-2 bg-gradient-to-l from-transparent to-orange-500/50 shadow-xl rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-center border border-orange-100"
           >
             {/* Text Section */}
             <div className="flex-1 text-gray-700 md:pr-6">
@@ -109,7 +110,7 @@ export default function AboutAmrut() {
               >
                 {currentItem.title}
               </h4>
-              <p className="text-base md:text-lg leading-relaxed whitespace-pre-line">
+              <p className="text-base md:text-sm leading-relaxed whitespace-pre-line content-justify" style={{fontFamily: 'poppins, sans-serif'}}>
                 {currentItem.description}
               </p>
             </div>

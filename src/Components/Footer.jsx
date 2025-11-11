@@ -20,7 +20,7 @@ const Footer = () => {
         {/* About Section */}
         <div>
           <h2 className="text-xl font-semibold text-white mb-3">आमच्याबद्दल</h2>
-          <p className="text-sm leading-relaxed">
+          <p className="text-sm leading-relaxed" style={{fontFamily: "poppins, serif"}}>
             राज्यातील खुल्या प्रवर्गातील आर्थिकदृष्ट्या दुर्बल घटकातील विद्यार्थी, युवक - युवती व इतर उमेदवार 
             इत्यादींचा विकास घडवण्यासाठी <strong>Academy of Maharashtra Research, Upliftment and Training (Amrut)</strong> 
             ‘अमृत’ अर्थात महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रबोधनी या स्वायत्त संस्थेची स्थापना 
@@ -71,7 +71,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="text-xs text-gray-400 text-center md:text-right">
-          © Content By <span className="text-orange-400 font-semibold">Academy of Maharashtra Research, Upliftment & Training (Amrut)</span> | All Rights Reserved
+          © Content By <span className="text-orange-400 font-semibold">Imperative business ventures </span> | All Rights Reserved
         </p>
       </div>
     </footer>

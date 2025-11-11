@@ -49,42 +49,51 @@ export default function AmrutSli() {
   }, []);
 
   return (
-    <section className="relative w-full py-16 bg-gradient-to-b from-orange-100 to-white overflow-hidden">
-      <div className="relative w-[85%] mx-auto rounded-3xl shadow-2xl bg-gradient-to-b from-orange-50 via-orange-100 to-white bg-[length:100%_200%] overflow-hidden backdrop-blur-sm">
+    <section className="relative w-[80%] m-auto py-16 bg-white overflow-hidden">
+      <div className="relative w-full mx-auto rounded-3xl  bg-gradient-to-b from-transparent to-orange-500/50 overflow-hidden backdrop-blur-sm">
         <div className="absolute inset-0 bg-gradient-to-t from-orange-300/30 via-transparent to-transparent pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col lg:flex-row items-stretch justify-between">
           {/* === LEFT SIDE === */}
           <div className="relative flex flex-col justify-between w-full lg:w-1/2 min-h-[50vh] text-center lg:text-left">
-            {/* Title + Description */}
-            <div className="pt-16 pb-6 px-6 md:px-10">
-              <h2
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-900 leading-snug mb-3"
-                style={{ fontFamily: "Baloo, serif" }}
+            {/* Title + Description with Smooth Transition */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index} // re-triggers animation on every slide change
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                className="pt-16 pb-6 px-6 md:px-10"
               >
-                {currentContent.title}
-              </h2>
-              <p
-                className="text-gray-800 text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
-                {currentContent.desc}
-              </p>
-            </div>
+                <h2
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-900 leading-snug mb-3"
+                  style={{ fontFamily: "Baloo, serif" }}
+                >
+                  {currentContent.title}
+                </h2>
+                <p
+                  className="text-gray-800 text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  {currentContent.desc}
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
             {/* Shaniwarwada Fort (Bottom Illustration) */}
-            <div className="relative flex justify-center items-end mt-auto">
-              <motion.div
-                className="absolute bottom-0 left-0 w-full h-[50%] bg-gradient-to-t from-orange-300/70 via-transparent to-transparent"
-                animate={{ opacity: [0.5, 0.8, 0.5] }}
-                transition={{ duration: 6, repeat: Infinity }}
-              ></motion.div>
-              <img
-                src="/images/wmremove-transformed (1) (1).png"
-                alt="Shaniwarwada Fort"
-                className="relative z-10 w-[85%] md:w-[75%] lg:w-[80%] object-contain mix-blend-multiply opacity-95 drop-shadow-[0_25px_60px_rgba(255,140,0,0.35)]"
-              />
-            </div>
+
+            <motion.div
+              className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-t from-orange-300/70 via-transparent to-transparent"
+              animate={{ opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 6, repeat: Infinity }}
+            ></motion.div>
+            <img
+              src="/images/wmremove-transformed (1) (1).png"
+              alt="Shaniwarwada Fort"
+              className="relative z-10 w-[85%] md:w-[75%] lg:w-[80%] object-contain mix-blend-multiply opacity-95 drop-shadow-[0_25px_60px_rgba(255,140,0,0.35)]"
+            />
+
           </div>
 
           {/* === RIGHT SIDE === */}
@@ -128,7 +137,7 @@ export default function AmrutSli() {
                 </button>
 
                 {/* Thumbnails */}
-                <div className="flex justify-center gap-3 overflow-x-auto pb-2">
+                <div className="flex justify-center gap-3 overflow-hidden pb-2">
                   {slides.slice(0, 4).map((thumb, i) => (
                     <motion.img
                       key={i}
@@ -137,8 +146,8 @@ export default function AmrutSli() {
                       onClick={() => setIndex(i)}
                       whileHover={{ scale: 1.05 }}
                       className={`w-16 h-12 md:w-20 md:h-14 rounded-lg object-cover cursor-pointer transition-all ${i === index
-                          ? "ring-2 ring-orange-500 shadow-md"
-                          : "opacity-70 hover:opacity-100"
+                        ? "ring-2 ring-orange-500 shadow-md"
+                        : "opacity-70 hover:opacity-100"
                         }`}
                     />
                   ))}

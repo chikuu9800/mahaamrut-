@@ -28,10 +28,10 @@ export default function AmrutMissionVision() {
   ];
 
   return (
-    <section className="relative min-h-screen py-20 text-center bg-gradient-to-b from-orange-100 to-white overflow-hidden">
+    <section className="relative min-h-[70%]  py-20 text-center w-[80%] m-auto overflow-hidden">
       {/* === Title === */}
       <motion.h2
-        className="text-4xl md:text-5xl font-bold text-orange-800 mb-6"
+        className="text-4xl md:text-5xl font-bold text-orange-800 mb-2"
         style={{ fontFamily: "Baloo, serif" }}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -54,11 +54,11 @@ export default function AmrutMissionVision() {
       </motion.p>
 
       {/* === Mission/Vision/Values Cards === */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 px-6 ">
         {cards.map((card, index) => (
           <motion.div
             key={card.id}
-            className="bg-white rounded-2xl shadow-md hover:shadow-xl p-8 flex flex-col items-center transition-all border border-orange-100 hover:border-orange-200"
+            className="bg-gradient-to-b from-transparent to-orange-500/40 rounded-2xl shadow-md hover:shadow-xl p-8 flex flex-col items-center transition-all border border-orange-100 hover:border-orange-200"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -69,16 +69,16 @@ export default function AmrutMissionVision() {
               boxShadow: "0 10px 25px rgba(255, 140, 0, 0.25)",
             }}
           >
-            <div className="w-16 h-16 flex items-center justify-center bg-orange-100 rounded-full mb-4 shadow-inner">
+            <div className="w-16 h-16 flex items-center justify-center bg-white rounded-full mb-4 shadow-inner border border-orange-200">
               {card.icon}
             </div>
             <h3
-              className="text-xl font-semibold text-orange-700 mb-2"
+              className="text-2xl font-bold text-orange-700 mb-2"
               style={{ fontFamily: "Baloo, serif" }}
             >
               {card.title}
             </h3>
-            <p className="text-gray-700 text-base leading-relaxed">
+            <p className="text-gray-700 text-base leading-relaxed" style={{fontFamily: 'poppins, sans-serif'}}>
               {card.description}
             </p>
           </motion.div>

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import orangeCircle from "/images/Red_dot__Japanese_art_Drawing_Ink_wash_painting__sushi_takeaway__watercolor_Painting__sphere__chinese_Painting_png-removebg-preview (1).png";
 
 const leftImages = [
   "/images/Mahapurush/1.png",
@@ -35,7 +34,7 @@ const MaharashtraShowcase = () => {
   }, []);
 
   return (
-    <div className=" bg-gradient-to-b from-white to-orange-100 ">
+    <div className=" bg-white ">
       <section className="relative w-full flex flex-col justify-center items-center py-12 md:py-16 overflow-hidden min-h-[80vh]">
         {/* === Section Header === */}
         <motion.h1
@@ -50,13 +49,12 @@ const MaharashtraShowcase = () => {
 
         {/* === Inner Container (Darker Gradient + Shadowed) === */}
         <div className="relative z-20 w-[90%] md:w-[80%] rounded-3xl flex flex-col md:flex-row 
-          bg-gradient-to-br from-orange-300 via-orange-200 to-orange-100 
           shadow-[0_20px_60px_rgba(0,0,0,0.25)] border border-orange-300/40
-          overflow-hidden md:h-[60vh] backdrop-blur-md transition-all duration-500">
+          overflow-hidden md:h-[50vh] backdrop-blur-md transition-all duration-500">
 
           {/* === LEFT SIDE IMAGE === */}
           <div className="md:w-1/2 w-full flex justify-center items-center 
-            bg-gradient-to-b from-orange-100 via-orange-50 to-orange-100 
+         
             p-8 sm:p-10 md:h-full h-[300px]">
             <AnimatePresence mode="wait">
               <motion.img
@@ -75,14 +73,12 @@ const MaharashtraShowcase = () => {
           {/* === RIGHT SIDE TEXT === */}
           <div
             className="md:w-1/2 w-full relative flex flex-col justify-center items-center text-center 
-            p-6 sm:p-10 bg-gradient-to-b from-orange-50 via-orange-100 to-orange-200 md:h-full h-auto"
+            p-6 sm:p-10 bg-gradient-to-b from-transparent to-orange-500/40 md:h-full h-auto"
           >
             {/* === Subtle Animated Orange Circle === */}
             <motion.div
               className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-70"
-              style={{
-                backgroundImage: `url(${orangeCircle})`,
-              }}
+              
               animate={{
                 scale: [1, 1.05, 1],
                 opacity: [0.55, 0.8, 0.55],
