@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function SLogon() {
   return (
-    <section className="relative w-[80%] m-auto min-h-[50vh]  px-4 flex items-center justify-center overflow-hidden">
+    <section className="relative w-[100%] md:w-[80%] m-auto md:min-h-[50vh]   md:px-4 flex items-center justify-center overflow-hidden">
       {/* === Main Card Animation === */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}

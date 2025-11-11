@@ -109,7 +109,7 @@ const AnimatedMapCircle = () => {
   const outerIcons = icons.slice(8);
 
   return (
-    <section className="relative w-[80%] m-auto min-h-[50vh] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-4 sm:px-8 md:px-20 py-12 sm:py-0 overflow-hidden">
+    <section className="relative w-[100%] md:w-[80%]  m-auto min-h-[50vh] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-4 sm:px-8 md:px-20 py-12 sm:py-0 overflow-hidden">
 
     {/* === Left Section: Text (top on mobile) === */}
     <div className="flex-1 text-center md:text-left max-w-xl space-y-4 mt-8 md:mt-0">
@@ -133,7 +133,7 @@ const AnimatedMapCircle = () => {
     {/* === Right Section: Animated Map Circle === */}
     <div
       className="flex-1 relative flex items-center justify-center w-full 
-      h-[45vh] sm:h-[50vh] md:h-[70vh] 
+      h-[100vh] sm:h-[100vh] md:h-[70vh] 
       scale-[0.85] md:scale-[1] transition-none"
       style={{
         transform: "translateZ(0)",
@@ -143,8 +143,8 @@ const AnimatedMapCircle = () => {
     >
       {/* Outer Circle */}
       <div className="outer-ring absolute 
-        w-[260px] sm:w-[320px] md:w-[400px] 
-        h-[260px] sm:h-[320px] md:h-[400px] 
+        w-[260px] sm:w-[250px] md:w-[400px] 
+        h-[260px] sm:h-[250px] md:h-[400px] 
         border border-orange-300 rounded-full flex items-center justify-center">
         {outerIcons.map((Icon, index) => {
           const angle = (index / outerIcons.length) * 2 * Math.PI;
@@ -165,8 +165,8 @@ const AnimatedMapCircle = () => {
   
       {/* Inner Circle */}
       <div className="inner-ring absolute 
-        w-[180px] sm:w-[220px] md:w-[280px] 
-        h-[180px] sm:h-[220px] md:h-[280px] 
+        w-[180px] sm:w-[170px] md:w-[280px] 
+        h-[180px] sm:h-[170px] md:h-[280px] 
         border border-orange-200 rounded-full flex items-center justify-center">
         {innerIcons.map((Icon, index) => {
           const angle = (index / innerIcons.length) * 2 * Math.PI;

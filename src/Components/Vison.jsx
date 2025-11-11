@@ -28,10 +28,10 @@ export default function AmrutMissionVision() {
   ];
 
   return (
-    <section className="relative min-h-[70%]  py-20 text-center w-[80%] m-auto overflow-hidden">
+    <section className="relative min-h-[70%]  py-20 text-center w-[100%] sm:px-5 md:w-[80%] m-auto overflow-hidden">
       {/* === Title === */}
       <motion.h2
-        className="text-4xl md:text-5xl font-bold text-orange-800 mb-2"
+        className="text-4xl md:text-5xl font-bold text-orange-800 mb-2 sm:px-5"
         style={{ fontFamily: "Baloo, serif" }}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export default function AmrutMissionVision() {
 
       {/* === Description === */}
       <motion.p
-        className="text-gray-700 text-md md:text-lg mb-14 max-w-3xl mx-auto leading-relaxed"
+        className="text-gray-700 text-md md:text-lg mb-14 max-w-3xl mx-auto leading-relaxed sm:px-5"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}

@@ -48,16 +48,16 @@ export default function AboutAmrut() {
   const currentItem = aboutData.find((item) => item.id === selected);
 
   return (
-    <section className="relative w-[80%] m-auto  py-16 px-4 md:px-10 bg-white">
+    <section className=" w-100% sm:w-[100%] md:w-[80%] m-auto  py-16 px-4 md:px-10 sm:px-0 bg-white">
       {/* Section Header */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 sm:w-[100%]">
         <h2
           className="text-3xl md:text-4xl font-bold text-orange-700 mb-2"
           style={{ fontFamily: "Baloo, serif" }}
         >
           अमृत विषयी माहिती
         </h2>
-        <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto" style={{fontFamily: 'poppins, sans-serif'}}>
+        <p className="text-gray-600 text-base md:text-lg max-w-3xl sm:w-[100%] mx-auto" style={{fontFamily: 'poppins, sans-serif'}}>
           महाराष्ट्र संशोधन, उन्नती व प्रशिक्षण प्रवोधिनी (अमृत) ही संस्था
           संशोधन, प्रशिक्षण आणि विकास उपक्रमांद्वारे युवकांना
           कौशल्यविकास, रोजगार आणि प्रगतीच्या संधी उपलब्ध करून देते.
