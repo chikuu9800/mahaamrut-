@@ -99,7 +99,7 @@ const Paripatra = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
             viewport={{ once: true }}
-            className="bg-[#fff9f0]/95 backdrop-blur-sm border border-[#c59a63]/40 hover:border-[#8b5e34] hover:shadow-[0_8px_20px_rgba(120,60,10,0.35)] transition-all rounded-xl p-6 flex items-center gap-4 text-left group relative overflow-hidden"
+            className="bg-[#fff9f0]/95 backdrop-blur-sm border border-[#c59a63]/50 hover:border-[#8b5e34] hover:shadow-[0_8px_20px_rgba(120,60,10,0.35)] transition-all rounded-xl p-6 flex items-center gap-4 text-left group relative overflow-hidden"
           >
             {/* Uniform Icon */}
             <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">

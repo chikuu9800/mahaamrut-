@@ -34,12 +34,12 @@ const Gallery = () => {
       {/* === Page Title === */}
       <div className="text-center mb-12">
         <h2
-          className="text-3xl sm:text-4xl font-bold text-orange-600 mb-3"
+          className="text-3xl sm:text-4xl font-bold text-orange-700 mb-3"
           style={{ fontFamily: "baloo, sans-serif" }}
         >
           आमची गॅलरी
         </h2>
-        <p className="text-gray-600 text-base sm:text-lg">
+        <p className="text-gray-600 text-base sm:text-lg" style={{ fontFamily: "poppins, sans-serif" }}>
           संस्थेच्या कार्यक्रमांची काही विशेष झलक.
         </p>
       </div>
@@ -66,10 +66,10 @@ const Gallery = () => {
 
             {/* Card Content */}
             <div className="p-5 flex flex-col flex-grow">
-              <h3 className="text-orange-600 text-lg font-semibold mb-2">
+              <h3 className="text-orange-600 text-lg font-semibold mb-2"  style={{ fontFamily: "poppins, sans-serif" }}>
                 {video.title}
               </h3>
-              <p className="text-gray-600 text-sm flex-grow">
+              <p className="text-gray-600 text-sm flex-grow"  style={{ fontFamily: "poppins, sans-serif" }}>
                 {video.description}
               </p>
               <a
