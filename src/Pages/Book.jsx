@@ -4,50 +4,50 @@ import { BookOpen, Download } from "lucide-react";
 const books = [
   {
     id: 1,
-    title: "अमृत प्रबोधनी वार्षिक अहवाल 2024",
+    title: "अमृत इ-बूक",
     description:
       "या अहवालात संस्थेच्या मागील वर्षातील कार्यप्रगती, योजना आणि उपक्रमांचा सविस्तर आढावा दिला आहे.",
-    cover: "/images/books/book1.jpg",
-    link: "/files/Amrut-Annual-Report-2024.pdf",
+    cover: "/images/Books/1.png",
+    link: "https://mahaamrut.org.in/wp-content/uploads/2025/04/Amrut_Ebook.pdf",
   },
   {
     id: 2,
-    title: "कौशल्य विकास पुस्तिका",
+    title: "अमृत इ-बूक",
     description:
       "राज्यातील युवकांसाठी कौशल्य विकास आणि प्रशिक्षण संधींबाबत माहिती देणारी पुस्तिका.",
-    cover: "/images/books/book2.jpg",
-    link: "/files/Skill-Development-Booklet.pdf",
+    cover: "/images/Books/1.png",
+    link: "https://mahaamrut.org.in/wp-content/uploads/2025/04/Amrut_Ebook.pdf",
   },
   {
     id: 3,
-    title: "महिला सक्षमीकरण मार्गदर्शिका",
+    title: "अमृत इ-बूक",
     description:
       "महिला उद्यम, स्वावलंबन आणि शिक्षण क्षेत्रातील संधींबाबत मार्गदर्शन करणारी पुस्तिका.",
-    cover: "/images/books/book3.jpg",
-    link: "/files/Women-Empowerment-Guide.pdf",
+    cover: "/images/Books/1.png",
+    link: "https://mahaamrut.org.in/wp-content/uploads/2025/04/Amrut_Ebook.pdf",
   },
   {
     id: 4,
-    title: "उद्योग प्रोत्साहन योजना अहवाल",
+    title: "अमृत इ-बूक",
     description:
       "राज्यातील उद्योग प्रोत्साहन आणि रोजगार निर्मितीवर आधारित संशोधन अहवाल.",
-    cover: "/images/books/book4.jpg",
-    link: "/files/Industry-Report.pdf",
+    cover: "/images/Books/1.png",
+    link: "https://mahaamrut.org.in/wp-content/uploads/2025/04/Amrut_Ebook.pdf",
   },
 ];
 
 const Book = () => {
   return (
-    <section className="w-full min-h-[90vh] bg-gradient-to-b from-orange-50 via-white to-orange-100 py-16 px-6 sm:px-10 md:px-20">
+    <section className="w-full md:w-[90%] m-auto py-16 px-6 sm:px-10 md:px-20">
       {/* === Page Header === */}
       <div className="text-center mb-12">
         <h2
-          className="text-3xl sm:text-4xl font-bold text-orange-600 mb-3"
+          className="text-3xl sm:text-4xl font-bold text-orange-700 mb-3"
           style={{ fontFamily: "baloo, sans-serif" }}
         >
           प्रकाशन व पुस्तिका
         </h2>
-        <p className="text-gray-600 text-base sm:text-lg">
+        <p className="text-gray-600 text-base sm:text-lg" style={{ fontFamily: "poppins, sans-serif" }}>
           AMRUT संस्थेच्या विविध अहवाल व माहिती पुस्तिकांचे संग्रह.
         </p>
       </div>
@@ -60,20 +60,20 @@ const Book = () => {
             className="bg-white rounded-2xl shadow-md hover:shadow-lg border border-orange-200 overflow-hidden transition-all duration-300 flex flex-col"
           >
             {/* Book Cover */}
-            <div className="w-full h-64 bg-gray-100">
+            <div className="w-full h-64 bg-orange-100">
               <img
                 src={book.cover}
                 alt={book.title}
-                className="w-full h-full object-cover"
+                className="w-[80%] m-auto h-full "
               />
             </div>
 
             {/* Content */}
             <div className="p-5 flex flex-col flex-grow">
-              <h3 className="text-orange-600 text-lg font-semibold mb-2">
+              <h3 className="text-orange-600 text-lg font-semibold mb-2" style={{ fontFamily: "poppins, sans-serif" }}>
                 {book.title}
               </h3>
-              <p className="text-gray-700 text-sm flex-grow mb-4">
+              <p className="text-gray-700 text-sm flex-grow mb-4" style={{ fontFamily: "poppins, sans-serif" }}>
                 {book.description}
               </p>
 
@@ -83,6 +83,7 @@ const Book = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-auto inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
+                style={{ fontFamily: "poppins, sans-serif" }}
               >
                 <Download size={16} />
                 डाउनलोड करा
