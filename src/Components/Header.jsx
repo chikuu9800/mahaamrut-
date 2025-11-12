@@ -74,7 +74,7 @@ export default function Header() {
     const [searchQuery, setSearchQuery] = useState('');
     useEffect(() => {
         const handleHover = () => {
-            document.querySelectorAll(".group/submenu, .group/nested").forEach((el) => {
+            document.querySelectorAll(".group-submenu, .group-nested").forEach((el) => {
                 const rect = el.getBoundingClientRect();
                 const sub = el.querySelector(".absolute");
                 if (sub) {
@@ -455,7 +455,7 @@ export default function Header() {
                             {menuStructure.map((menu, idx) => (
                                 <li
                                     key={idx}
-                                    className="relative group/menu text-left"
+                                    className="relative group-menu text-left"
                                     onMouseEnter={() => setOpenMenu(idx)}
                                     onMouseLeave={() => {
                                         setTimeout(() => {
@@ -667,7 +667,7 @@ export default function Header() {
                             ))}
                         </ul>
 
-
+    
 
 
 

@@ -85,7 +85,7 @@ export default function AmrutBanner() {
               className="text-base sm:text-lg md:text-xl lg:text-[1.3rem] leading-relaxed text-white/90 max-w-lg drop-shadow-md"
               style={{ fontFamily: "Poppins, serif" }}
             >
-              “{current.description}”
+              {current.description}
             </p>
 
             <motion.a
