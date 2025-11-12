@@ -9,6 +9,7 @@ import Beneficiaries from "./Pages/Beneficiaries";
 import Book from "./Pages/Book";
 import Contact from "./Pages/Contact";
 import Gallery from './Pages/Gallery';
+import SingleYojana from "./Pages/SingleYojana";
 
 const App = () => {
   return (
@@ -24,9 +25,7 @@ const App = () => {
         <Route path="/Book" element={<Book />} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Gallery" element={<Gallery/>} />
-
-
-
+        <Route path="/scheme/:id" element={<SingleYojana/>} />
 
       </Routes>
       <Footer />

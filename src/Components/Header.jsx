@@ -455,19 +455,21 @@ export default function Header() {
                             {menuStructure.map((menu, idx) => (
                                 <li
                                     key={idx}
-                                    className="relative group/menu text-left" // 👈 keeps all text left-aligned
-                                    onMouseEnter={() => setOpenMenu(idx)} // 👈 hover opens main dropdown
+                                    className="relative group/menu text-left"
+                                    onMouseEnter={() => setOpenMenu(idx)}
                                     onMouseLeave={() => {
-                                        setOpenMenu(null);
-                                        setActiveSubmenu({ submenuIndex: null, nestedIndex: null });
+                                        setTimeout(() => {
+                                            setOpenMenu(null);
+                                            setActiveSubmenu({ submenuIndex: null, nestedIndex: null });
+                                        }, 200); // delay keeps dropdown open long enough to click
                                     }}
-                                    style={{ fontFamily: 'baloo, serif', fontWeight: 600 }}
+                                    style={{ fontFamily: "baloo, serif", fontWeight: 600 }}
                                 >
                                     {/* === MAIN MENU BUTTON === */}
                                     {menu.submenus ? (
                                         <button
+                                            onClick={() => setOpenMenu(openMenu === idx ? null : idx)}
                                             className="flex items-center justify-between gap-1 px-4 py-3 bg-white text-base text-[#ff671f] hover:bg-orange-50 transition-all w-full text-left"
-                                            style={{ fontFamily: "baloo, serif" }}
                                         >
                                             {menu.name}
                                             <motion.span
@@ -481,8 +483,13 @@ export default function Header() {
                                     ) : (
                                         <Link
                                             to={menu.link}
+                                            onClick={() => {
+                                                setTimeout(() => {
+                                                    setOpenMenu(null);
+                                                    setActiveSubmenu({ submenuIndex: null, nestedIndex: null });
+                                                }, 150);
+                                            }}
                                             className="flex items-center gap-1 px-4 py-3 bg-white text-base text-[#ff671f] hover:bg-orange-50 transition-all text-left"
-                                            style={{ fontFamily: "baloo, serif" }}
                                         >
                                             {menu.name}
                                         </Link>
@@ -515,28 +522,44 @@ export default function Header() {
                                                         return (
                                                             <div key={subIdx} className="border-b border-orange-100">
                                                                 {/* === LEVEL 1 === */}
-                                                                <button
-                                                                    onClick={() =>
-                                                                        setActiveSubmenu((prev) => ({
-                                                                            submenuIndex:
-                                                                                prev.submenuIndex === subIdx ? null : subIdx,
-                                                                            nestedIndex: null,
-                                                                        }))
-                                                                    }
-                                                                    className="flex justify-between w-full items-center px-5 py-3 text-[#ff671f] hover:bg-orange-50 cursor-pointer text-sm text-left"
-                                                                >
-                                                                    <span>{isNested ? submenu.title : submenu.name}</span>
-                                                                    {isNested && (
+                                                                {!isNested ? (
+                                                                    <Link
+                                                                        to={submenu.link}
+                                                                        onClick={() => {
+                                                                            setTimeout(() => {
+                                                                                setOpenMenu(null);
+                                                                                setActiveSubmenu({
+                                                                                    submenuIndex: null,
+                                                                                    nestedIndex: null,
+                                                                                });
+                                                                            }, 150);
+                                                                        }}
+                                                                        className="block px-5 py-3 text-[#ff671f] hover:bg-orange-50 cursor-pointer text-sm text-left"
+                                                                    >
+                                                                        {submenu.name}
+                                                                    </Link>
+                                                                ) : (
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            setActiveSubmenu((prev) => ({
+                                                                                submenuIndex:
+                                                                                    prev.submenuIndex === subIdx ? null : subIdx,
+                                                                                nestedIndex: null,
+                                                                            }))
+                                                                        }
+                                                                        className="flex justify-between w-full items-center px-5 py-3 text-[#ff671f] hover:bg-orange-50 cursor-pointer text-sm text-left"
+                                                                    >
+                                                                        <span>{submenu.title}</span>
                                                                         <motion.span
                                                                             animate={{ rotate: isSubOpen ? 180 : 0 }}
                                                                             transition={{ duration: 0.2 }}
                                                                         >
                                                                             <ChevronDown size={14} />
                                                                         </motion.span>
-                                                                    )}
-                                                                </button>
+                                                                    </button>
+                                                                )}
 
-                                                                {/* === LEVEL 2 (Click to open) === */}
+                                                                {/* === LEVEL 2 (Nested submenu) === */}
                                                                 <AnimatePresence>
                                                                     {isNested && isSubOpen && (
                                                                         <motion.div
@@ -551,27 +574,38 @@ export default function Header() {
                                                                                     typeof nestedItem === "object" &&
                                                                                     "subdetails" in nestedItem;
                                                                                 const isNestedOpen =
-                                                                                    activeSubmenu.nestedIndex === nIdx &&
-                                                                                    isSubOpen;
+                                                                                    activeSubmenu.nestedIndex === nIdx && isSubOpen;
 
                                                                                 return (
                                                                                     <div key={nIdx} className="border-b border-orange-100">
-                                                                                        <button
-                                                                                            onClick={() =>
-                                                                                                setActiveSubmenu((prev) => ({
-                                                                                                    ...prev,
-                                                                                                    nestedIndex:
-                                                                                                        prev.nestedIndex === nIdx ? null : nIdx,
-                                                                                                }))
-                                                                                            }
-                                                                                            className="flex justify-between w-full items-center px-8 py-3 text-[#ff671f] hover:bg-orange-100 cursor-pointer text-sm text-left"
-                                                                                        >
-                                                                                            <span>
-                                                                                                {hasSubdetails
-                                                                                                    ? nestedItem.title
-                                                                                                    : nestedItem.name}
-                                                                                            </span>
-                                                                                            {hasSubdetails && (
+                                                                                        {!hasSubdetails ? (
+                                                                                            <Link
+                                                                                                to={nestedItem.link}
+                                                                                                onClick={() => {
+                                                                                                    setTimeout(() => {
+                                                                                                        setOpenMenu(null);
+                                                                                                        setActiveSubmenu({
+                                                                                                            submenuIndex: null,
+                                                                                                            nestedIndex: null,
+                                                                                                        });
+                                                                                                    }, 150);
+                                                                                                }}
+                                                                                                className="block px-8 py-3 text-[#ff671f] hover:bg-orange-100 text-sm text-left"
+                                                                                            >
+                                                                                                {nestedItem.name}
+                                                                                            </Link>
+                                                                                        ) : (
+                                                                                            <button
+                                                                                                onClick={() =>
+                                                                                                    setActiveSubmenu((prev) => ({
+                                                                                                        ...prev,
+                                                                                                        nestedIndex:
+                                                                                                            prev.nestedIndex === nIdx ? null : nIdx,
+                                                                                                    }))
+                                                                                                }
+                                                                                                className="flex justify-between w-full items-center px-8 py-3 text-[#ff671f] hover:bg-orange-100 cursor-pointer text-sm text-left"
+                                                                                            >
+                                                                                                <span>{nestedItem.title}</span>
                                                                                                 <motion.span
                                                                                                     animate={{
                                                                                                         rotate: isNestedOpen ? 180 : 0,
@@ -580,10 +614,10 @@ export default function Header() {
                                                                                                 >
                                                                                                     <ChevronDown size={12} />
                                                                                                 </motion.span>
-                                                                                            )}
-                                                                                        </button>
+                                                                                            </button>
+                                                                                        )}
 
-                                                                                        {/* === LEVEL 3 === */}
+                                                                                        {/* === LEVEL 3 (Subdetails) === */}
                                                                                         <AnimatePresence>
                                                                                             {hasSubdetails && isNestedOpen && (
                                                                                                 <motion.div
@@ -598,6 +632,15 @@ export default function Header() {
                                                                                                             <Link
                                                                                                                 key={dIdx}
                                                                                                                 to={detail.link}
+                                                                                                                onClick={() => {
+                                                                                                                    setTimeout(() => {
+                                                                                                                        setOpenMenu(null);
+                                                                                                                        setActiveSubmenu({
+                                                                                                                            submenuIndex: null,
+                                                                                                                            nestedIndex: null,
+                                                                                                                        });
+                                                                                                                    }, 150);
+                                                                                                                }}
                                                                                                                 className="block px-10 py-2 text-[#ff671f] hover:bg-orange-200 transition-colors text-sm text-left"
                                                                                                             >
                                                                                                                 {detail.name}
@@ -623,6 +666,8 @@ export default function Header() {
                                 </li>
                             ))}
                         </ul>
+
+
 
 
 
