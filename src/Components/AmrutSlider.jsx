@@ -37,7 +37,7 @@ const slideContent = [
   },
 ];
 
-export default function AmrutSli() {
+export default function AmrutSlider() {
   const [index, setIndex] = useState(0);
   const nextSlide = () => setIndex((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setIndex((prev) => (prev - 1 + slides.length) % slides.length);

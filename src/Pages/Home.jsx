@@ -1,24 +1,24 @@
 import React from 'react'
-import EmbassyBanner from '../Components/Banner'
 import SLogon from '../Components/SLogon'
-import Tabs from '../Components/Tabs'
-import AnimatedMap from '../Components/AnimatedMap'
 import MaharashtraShowcase from '../Components/SliderMaha'
 import AmrutStats from '../Components/Dynamic'
 import AmrutMissionVision from '../Components/Vison'
-import YojanaSlider from '../Components/Slider'
 import AmrutSlider from '../Components/AmrutSlider'
+import AmrutBanner from '../Components/Banner'
+import AboutAmrut from '../Components/Slider'
+import YojanaSection from '../Components/Tabs'
+import AnimatedMapCircle from '../Components/AnimatedMap'
 
 
 const Home = () => {
   return (
     <div>
-      <EmbassyBanner />
+      <AmrutBanner />
       <SLogon />
-      <YojanaSlider />
-      <Tabs />
+      <AboutAmrut />
+      <YojanaSection />
       <AmrutMissionVision />
-      <AnimatedMap />
+      <AnimatedMapCircle />
       <AmrutSlider/>
       <MaharashtraShowcase />
       <AmrutStats />
