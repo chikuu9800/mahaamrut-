@@ -100,12 +100,12 @@ export default function AboutAmrut() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-2 bg-gradient-to-l from-transparent to-orange-500/50 shadow-xl rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-center border border-orange-100"
+            className="md:col-span-2 bg-gradient-to-l from-transparent to-orange-500/50 shadow-xl rounded-2xl py-5  md:px-8 flex flex-col md:flex-row  border border-orange-100"
           >
             {/* Text Section */}
             <div className="flex-1 text-gray-700 md:pr-6">
               <h4
-                className="text-xl md:text-2xl font-semibold text-orange-700 mb-3"
+                className="text-xl md:text-2xl font-semibold text-700 text-orange-700 mb-3"
                 style={{ fontFamily: "Baloo, serif" }}
               >
                 {currentItem.title}
